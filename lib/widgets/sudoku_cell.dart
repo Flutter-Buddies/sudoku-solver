@@ -4,14 +4,23 @@ import 'package:sudoku_solver/models/board_square.dart';
 import 'package:sudoku_solver/models/sudoku_grid.dart';
 
 class SudokuCell extends StatelessWidget {
-  SudokuCell({this.row, this.column});
-  final int row;
-  final int column;
+  // We are using the value of 0 to mean blank, therefore if the value of the board square is 0 we need to show nothing
+  String getCellValue(int cellValue) {
+    if (cellValue == 0) {
+      return '';
+    } else {
+      return cellValue.toString();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        print('Cell row: $row, Cell column: $column');
+        // Print the coordinated in a human readable way
+        print(
+            'Cell row: ${Provider.of<BoardSquare>(context, listen: false).position.x}, Cell column: ${Provider.of<BoardSquare>(context, listen: false).position.y}');
+        // Update the value of the board square based on the current selected number from the keypad
         Provider.of<BoardSquare>(context, listen: false)
             .updateValue(Provider.of<SudokuGrid>(context, listen: false).selectedNumber);
       },
@@ -22,17 +31,17 @@ class SudokuCell extends StatelessWidget {
           color: Colors.green,
           border: Border(
             right: BorderSide(
-              width: (column % 3 == 2) ? 3 : 1,
+              width: (Provider.of<BoardSquare>(context, listen: false).position.y % 3 == 2) ? 3 : 1,
               color: Colors.black,
             ),
             bottom: BorderSide(
-              width: (row % 3 == 2) ? 3 : 1,
+              width: (Provider.of<BoardSquare>(context, listen: false).position.x % 3 == 2) ? 3 : 1,
               color: Colors.black,
             ),
           ),
         ),
         child: Center(
-          child: Text(Provider.of<BoardSquare>(context).value.toString()),
+          child: Text(getCellValue(Provider.of<BoardSquare>(context).value)),
         ),
       ),
     );

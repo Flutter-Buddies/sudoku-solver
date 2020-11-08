@@ -23,7 +23,7 @@ class SolveScreen extends StatelessWidget {
             IconButton(
                 icon: Icon(Icons.refresh),
                 onPressed: () {
-                  // Clear board
+                  Provider.of<SudokuGrid>(context, listen: false).resetBoard();
                 })
           ],
           title: Text('Solve Screen'),
@@ -52,7 +52,8 @@ class SolveScreen extends StatelessWidget {
                     child: RaisedButton(
                       onPressed: () {
                         // Solve the board
-                        print(Provider.of<SudokuGrid>(context, listen: false));
+                        //print(Provider.of<SudokuGrid>(context, listen: false));
+                        Provider.of<SudokuGrid>(context, listen: false).createFullSublist();
                       },
                       child: Text('Solve!'),
                     ),
