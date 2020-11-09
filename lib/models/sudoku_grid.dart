@@ -60,20 +60,20 @@ class SudokuGrid extends ChangeNotifier {
   // Function to create list of the small 3x3 grids
   List<List<BoardSquare>> getSublistThreeXThree() {
     List<List<BoardSquare>> _listOfThreeXThree = [];
-    for (int i = 0; i < height; i + 3) {
-      List<BoardSquare> _listOfBoardSquares = [];
-      // I'm sure there's a better way of doing this but I can't be bothered right not
-      // WARNING: This function causes extremely high memory usage and app to crash. Why? Infinite loop?
-      _listOfBoardSquares.add(board[i][i]);
-      _listOfBoardSquares.add(board[i][i + 1]);
-      _listOfBoardSquares.add(board[i][i + 2]);
-      _listOfBoardSquares.add(board[i + 1][i]);
-      _listOfBoardSquares.add(board[i + 1][i + 1]);
-      _listOfBoardSquares.add(board[i + 1][i + 2]);
-      _listOfBoardSquares.add(board[i + 2][i]);
-      _listOfBoardSquares.add(board[i + 2][i + 1]);
-      _listOfBoardSquares.add(board[i + 2][i + 2]);
-      _listOfThreeXThree.add(_listOfBoardSquares);
+    for (int i = 0; i < height; i += 3) {
+      for (int j = 0; j < width; j += 3) {
+        List<BoardSquare> _subListOfBoardSquares = [];
+        _subListOfBoardSquares.add(board[i][j]);
+        _subListOfBoardSquares.add(board[i][j + 1]);
+        _subListOfBoardSquares.add(board[i][j + 2]);
+        _subListOfBoardSquares.add(board[i + 1][j]);
+        _subListOfBoardSquares.add(board[i + 1][j + 1]);
+        _subListOfBoardSquares.add(board[i + 1][j + 2]);
+        _subListOfBoardSquares.add(board[i + 2][j]);
+        _subListOfBoardSquares.add(board[i + 2][j + 1]);
+        _subListOfBoardSquares.add(board[i + 2][j + 2]);
+        _listOfThreeXThree.add(_subListOfBoardSquares);
+      }
     }
     return _listOfThreeXThree;
   }
@@ -82,15 +82,35 @@ class SudokuGrid extends ChangeNotifier {
   void createFullSublist() {
     List<List<BoardSquare>> rows = getSublistOfRows();
     List<List<BoardSquare>> columns = getSublistOfColumns();
-    // List<List<BoardSquare>> threeXThree = getSublistThreeXThree();
-    print('These are the rows:');
-    print(rows);
-    print('These are the columns:');
-    print(columns);
+    List<List<BoardSquare>> threeXThree = getSublistThreeXThree();
+    // print('These are the rows:');
+    // print(rows);
+    // print('These are the columns:');
+    // print(columns);
     // print('These are the 3x3');
     // print(threeXThree);
-    // subsets = rows + columns + threeXThree;
+    subsets = rows + columns + threeXThree;
     // print(subsets);
+  }
+
+  // Function to check that each sublist has a unique number
+  bool checkUnique() {
+    bool isUnique = true;
+    for (List<BoardSquare> boardList in subsets) {
+      List<int> set = [];
+      // Check if values are unique in a given sublist
+      // Todo: It would be helpful if the function could highlight the offending square
+      for (BoardSquare square in boardList) {
+        if (set.contains(square.value) == true && square.value != 0) {
+          isUnique = false;
+          print('Offending square is x: ' + square.position.x.toString() + ' y: ' + square.position.y.toString());
+          break;
+        } else {
+          set.add(square.value);
+        }
+      }
+    }
+    return isUnique;
   }
 
   void updateSelectedNumber(int newNumber) {

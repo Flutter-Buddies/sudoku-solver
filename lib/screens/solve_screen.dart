@@ -49,14 +49,7 @@ class SolveScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(16.0),
                   child: Container(
                     width: double.infinity,
-                    child: RaisedButton(
-                      onPressed: () {
-                        // Solve the board
-                        //print(Provider.of<SudokuGrid>(context, listen: false));
-                        Provider.of<SudokuGrid>(context, listen: false).createFullSublist();
-                      },
-                      child: Text('Solve!'),
-                    ),
+                    child: BottomButton(),
                   ),
                 ),
               ),
@@ -64,6 +57,25 @@ class SolveScreen extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class BottomButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return RaisedButton(
+      onPressed: () {
+        final snackBar = SnackBar(duration: Duration(seconds: 2), content: Text('There is an error on the board!'));
+        // Solve the board
+        //print(Provider.of<SudokuGrid>(context, listen: false));
+        Provider.of<SudokuGrid>(context, listen: false).createFullSublist();
+        print('Is a valid board: ' + Provider.of<SudokuGrid>(context, listen: false).checkUnique().toString());
+        if (Provider.of<SudokuGrid>(context, listen: false).checkUnique() == false) {
+          Scaffold.of(context).showSnackBar(snackBar);
+        }
+      },
+      child: Text('Solve!'),
     );
   }
 }
