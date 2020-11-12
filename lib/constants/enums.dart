@@ -1,0 +1,1 @@
+enum SolveScreenStates { Idle, Loading }

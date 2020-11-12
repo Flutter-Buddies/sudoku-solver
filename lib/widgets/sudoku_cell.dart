@@ -18,8 +18,8 @@ class SudokuCell extends StatelessWidget {
     return InkWell(
       onTap: () {
         // Print the coordinated in a human readable way
-        print(
-            'Cell row: ${Provider.of<BoardSquare>(context, listen: false).position.x}, Cell column: ${Provider.of<BoardSquare>(context, listen: false).position.y}');
+        // print(
+        //     'Cell row: ${Provider.of<BoardSquare>(context, listen: false).position.x}, Cell column: ${Provider.of<BoardSquare>(context, listen: false).position.y}');
         // Update the value of the board square based on the current selected number from the keypad
         Provider.of<BoardSquare>(context, listen: false)
             .updateValue(Provider.of<SudokuGrid>(context, listen: false).selectedNumber);

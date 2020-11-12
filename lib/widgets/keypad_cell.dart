@@ -10,7 +10,7 @@ class KeyPadCell extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        print(numberValue);
+        //print(numberValue);
         Provider.of<SudokuGrid>(context, listen: false).updateSelectedNumber(numberValue);
       },
       child: Container(

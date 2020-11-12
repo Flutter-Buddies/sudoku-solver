@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sudoku_solver/constants/enums.dart';
 import 'package:sudoku_solver/models/sudoku_grid.dart';
 import 'package:sudoku_solver/widgets/sudoku_table.dart';
 import 'package:sudoku_solver/widgets/keypad.dart';
@@ -67,15 +68,21 @@ class BottomButton extends StatelessWidget {
     return RaisedButton(
       onPressed: () {
         final snackBar = SnackBar(duration: Duration(seconds: 2), content: Text('There is an error on the board!'));
+
+        Provider.of<SudokuGrid>(context, listen: false)
+            .solveBoard(Provider.of<SudokuGrid>(context, listen: false).userBoard);
+        // print(Provider.of<SudokuGrid>(context, listen: false).validBoards.first);
         // Solve the board
         //print(Provider.of<SudokuGrid>(context, listen: false));
-        Provider.of<SudokuGrid>(context, listen: false).createFullSublist();
-        print('Is a valid board: ' + Provider.of<SudokuGrid>(context, listen: false).checkUnique().toString());
-        if (Provider.of<SudokuGrid>(context, listen: false).checkUnique() == false) {
-          Scaffold.of(context).showSnackBar(snackBar);
-        }
+        // Provider.of<SudokuGrid>(context, listen: false).createFullSublist();
+        // print('Is a valid board: ' + Provider.of<SudokuGrid>(context, listen: false).checkUnique().toString());
+        // if (Provider.of<SudokuGrid>(context, listen: false).checkUnique() == false) {
+        //   Scaffold.of(context).showSnackBar(snackBar);
+        // }
       },
-      child: Text('Solve!'),
+      child: Provider.of<SudokuGrid>(context).solveScreenStates == SolveScreenStates.Idle
+          ? Text('Solve!')
+          : CircularProgressIndicator(),
     );
   }
 }

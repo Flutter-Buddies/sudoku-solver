@@ -25,7 +25,7 @@ class SudokuTable extends StatelessWidget {
           children: List.generate(
             Provider.of<SudokuGrid>(context).width,
             (int columnNumber) => ChangeNotifierProvider<BoardSquare>.value(
-              value: Provider.of<SudokuGrid>(context).board[rowNumber][columnNumber],
+              value: Provider.of<SudokuGrid>(context).userBoard[rowNumber][columnNumber],
               child: SudokuCell(),
             ),
           ),
