@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sudoku_solver/constants/enums.dart';
 import 'package:sudoku_solver/models/board_square.dart';
 import 'package:sudoku_solver/models/position_model.dart';
+import 'dart:isolate';
 
 class SudokuGrid extends ChangeNotifier {
   List<List<BoardSquare>> userBoard;
@@ -44,8 +45,24 @@ class SudokuGrid extends ChangeNotifier {
     notifyListeners();
   }
 
+  set updateUIBoard(List<List<BoardSquare>> board) {
+    this.userBoard = board;
+    notifyListeners();
+  }
+
   // Function to fill a given square with numbers 1 - 9 and produce a list of boards
-  Future<void> solveBoard(List<List<BoardSquare>> originalBoard) async {
+  List<List<BoardSquare>> solveBoard(List<List<BoardSquare>> originalBoard) {
+    // void entryPoint(SendPort sendPort) async {
+    //   var port = ReceivePort();
+    //   sendPort.send(port.sendPort);
+    //   await for (var data in port) {}
+    // }
+    //
+    // var receivePort = ReceivePort();
+    // await Isolate.spawn(entryPoint, receivePort.sendPort);
+    // SendPort sendPort = await receivePort.first;
+    // sendPort.send("hello");
+
     solveScreenStates = SolveScreenStates.Loading;
     notifyListeners();
     // Duplicate board
@@ -68,9 +85,6 @@ class SudokuGrid extends ChangeNotifier {
         // If empty, iterate. If not the board is complete
         if (hasBlanks(board) == false) {
           userBoard = board;
-          solveScreenStates = SolveScreenStates.Idle;
-          notifyListeners();
-          break;
         } else {
           solveBoard(board);
         }
@@ -78,6 +92,8 @@ class SudokuGrid extends ChangeNotifier {
         // do nothing
       }
     }
+    solveScreenStates = SolveScreenStates.Idle;
+    notifyListeners();
   }
 
   // Helper function to find the position of the next empty square

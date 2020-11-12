@@ -71,14 +71,6 @@ class BottomButton extends StatelessWidget {
 
         Provider.of<SudokuGrid>(context, listen: false)
             .solveBoard(Provider.of<SudokuGrid>(context, listen: false).userBoard);
-        // print(Provider.of<SudokuGrid>(context, listen: false).validBoards.first);
-        // Solve the board
-        //print(Provider.of<SudokuGrid>(context, listen: false));
-        // Provider.of<SudokuGrid>(context, listen: false).createFullSublist();
-        // print('Is a valid board: ' + Provider.of<SudokuGrid>(context, listen: false).checkUnique().toString());
-        // if (Provider.of<SudokuGrid>(context, listen: false).checkUnique() == false) {
-        //   Scaffold.of(context).showSnackBar(snackBar);
-        // }
       },
       child: Provider.of<SudokuGrid>(context).solveScreenStates == SolveScreenStates.Idle
           ? Text('Solve!')
