@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<SudokuGrid>(
-      create: (context) => SudokuGrid.fromTemplate(mediumBoard),
+      create: (context) => SudokuGrid.fromTemplate(hardBoard),
       child: MaterialApp(
         title: 'Sudoku Solver',
         theme: ThemeData(

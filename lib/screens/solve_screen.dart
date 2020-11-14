@@ -1,5 +1,7 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:sudoku_solver/constants/enums.dart';
+import 'package:sudoku_solver/models/board_square.dart';
 import 'package:sudoku_solver/models/sudoku_grid.dart';
 import 'package:sudoku_solver/widgets/sudoku_table.dart';
 import 'package:sudoku_solver/widgets/keypad.dart';
@@ -70,7 +72,9 @@ class BottomButton extends StatelessWidget {
         final snackBar = SnackBar(duration: Duration(seconds: 2), content: Text('There is an error on the board!'));
 
         Provider.of<SudokuGrid>(context, listen: false)
-            .solveBoard(Provider.of<SudokuGrid>(context, listen: false).userBoard);
+            .solveButtonPress(Provider.of<SudokuGrid>(context, listen: false).userBoard);
+        // Provider.of<SudokuGrid>(context, listen: false)
+        //     .solveBoard(Provider.of<SudokuGrid>(context, listen: false).userBoard);
       },
       child: Provider.of<SudokuGrid>(context).solveScreenStates == SolveScreenStates.Idle
           ? Text('Solve!')
