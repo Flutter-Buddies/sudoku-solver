@@ -17,13 +17,16 @@ class KeyPadCell extends StatelessWidget {
         height: 40,
         width: 40,
         decoration: BoxDecoration(
-          color: numberValue == Provider.of<SudokuGrid>(context).selectedNumber ? Colors.blue : Colors.blueGrey[200],
+          color: numberValue == Provider.of<SudokuGrid>(context).selectedNumber ? Colors.blueAccent : Colors.blue[200],
           border: Border.all(color: Colors.black, width: 1),
         ),
         child: Center(
-          child: Text(
-            // Instead of showing the number 0, we want the user to be able to a blank space
-            numberValue == 0 ? 'Blank' : numberValue.toString(),
+          child: FittedBox(
+            fit: BoxFit.fill,
+            child: Text(
+              // Instead of showing the number 0, we want the user to be able to a blank space
+              numberValue == 0 ? 'Remove' : numberValue.toString(),
+            ),
           ),
         ),
       ),

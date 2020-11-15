@@ -11,18 +11,17 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<SudokuGrid>(
-      create: (context) => SudokuGrid.fromTemplate(hardBoard),
+      create: (context) => SudokuGrid.fromTemplate(mediumBoard),
       child: MaterialApp(
         title: 'Sudoku Solver',
         theme: ThemeData(
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        initialRoute: 'solve',
+        initialRoute: 'home',
         routes: {
           'home': (context) => MyHomePage(),
           'solve': (context) => SolveScreen(),

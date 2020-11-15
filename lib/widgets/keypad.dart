@@ -9,7 +9,7 @@ class KeyPad extends StatelessWidget {
     return Table(
       border: TableBorder.all(
         width: 3,
-        color: Colors.black,
+        color: Colors.blueAccent,
       ),
       children: List.generate(
         rows,

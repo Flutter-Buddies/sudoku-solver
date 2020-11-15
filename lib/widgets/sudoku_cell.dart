@@ -17,9 +17,6 @@ class SudokuCell extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        // Print the coordinated in a human readable way
-        // print(
-        //     'Cell row: ${Provider.of<BoardSquare>(context, listen: false).position.x}, Cell column: ${Provider.of<BoardSquare>(context, listen: false).position.y}');
         // Update the value of the board square based on the current selected number from the keypad
         Provider.of<BoardSquare>(context, listen: false)
             .updateValue(Provider.of<SudokuGrid>(context, listen: false).selectedNumber);
@@ -28,15 +25,15 @@ class SudokuCell extends StatelessWidget {
         height: 40,
         width: 30,
         decoration: BoxDecoration(
-          color: Colors.green,
+          color: Colors.blue[200],
           border: Border(
             right: BorderSide(
               width: (Provider.of<BoardSquare>(context, listen: false).position.y % 3 == 2) ? 3 : 1,
-              color: Colors.black,
+              color: Colors.blueAccent,
             ),
             bottom: BorderSide(
               width: (Provider.of<BoardSquare>(context, listen: false).position.x % 3 == 2) ? 3 : 1,
-              color: Colors.black,
+              color: Colors.blueAccent,
             ),
           ),
         ),

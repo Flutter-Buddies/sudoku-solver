@@ -11,6 +11,7 @@ class SudokuGrid extends ChangeNotifier {
   int height;
   int selectedNumber = 0;
   SolveScreenStates solveScreenStates = SolveScreenStates.Idle;
+  BoardErrors boardErrors = BoardErrors.None;
 
   // Generic constructor
   SudokuGrid({this.userBoard, this.width, this.height});
@@ -43,6 +44,7 @@ class SudokuGrid extends ChangeNotifier {
     });
     this.selectedNumber = 0;
     solveScreenStates = SolveScreenStates.Idle;
+    boardErrors = BoardErrors.None;
     notifyListeners();
   }
 
@@ -52,24 +54,33 @@ class SudokuGrid extends ChangeNotifier {
   }
 
   Future<void> solveButtonPress(List<List<BoardSquare>> board) async {
-    solveScreenStates = SolveScreenStates.Loading;
-    notifyListeners();
-    // Create list of ints from board to be passed into compute function
-    List<List<int>> simpleBoard = List.generate(
-      9,
-      (int row) => List.generate(
+    if (checkLegal(board) == false) {
+      boardErrors = BoardErrors.Duplicate;
+      notifyListeners();
+    } else {
+      boardErrors = BoardErrors.None;
+      solveScreenStates = SolveScreenStates.Loading;
+      notifyListeners();
+      // Create list of ints from board to be passed into compute function
+      List<List<int>> simpleBoard = List.generate(
         9,
-        (int column) => board[row][column].value,
-      ),
-    );
+        (int row) => List.generate(
+          9,
+          (int column) => board[row][column].value,
+        ),
+      );
 
-    // Compute function <--- Currently not working (help please!)
-    List<List<BoardSquare>> result = await compute(solveBoard, simpleBoard);
-    // Non-compute function
-    // List<List<BoardSquare>> result = await solveBoard(simpleBoard);
-    userBoard = result;
-    solveScreenStates = SolveScreenStates.Idle;
-    notifyListeners();
+      List<List<BoardSquare>> result = await compute(solveBoard, simpleBoard);
+      if (result != null) {
+        userBoard = result;
+        solveScreenStates = SolveScreenStates.Solved;
+        notifyListeners();
+      } else {
+        solveScreenStates = SolveScreenStates.Idle;
+        boardErrors = BoardErrors.UnSolvable;
+        notifyListeners();
+      }
+    }
   }
 
   // Get a specific board square given a coordinate
@@ -103,20 +114,6 @@ class SudokuGrid extends ChangeNotifier {
         userBoard[8].toString();
   }
 }
-
-// Function to convert an ordered list of numbers into a Board
-List<List<BoardSquare>> convertIntToBoard(List<List<int>> simpleBoard) {
-  List<List<BoardSquare>> newBoard = List.generate(
-    9,
-    (int row) => List.generate(
-      9,
-      (int column) => BoardSquare(position: Position(x: row, y: column), value: simpleBoard[row][column]),
-    ),
-  );
-  return newBoard;
-}
-
-List<List<BoardSquare>> solvedBoard;
 
 // Function to fill a given square with numbers 1 - 9 and produce a list of boards
 List<List<BoardSquare>> solveBoard(List<List<int>> simpleBoard) {
@@ -271,6 +268,18 @@ List<List<BoardSquare>> createNewBoard(List<List<BoardSquare>> oldBoard) {
     (int row) => List.generate(
       9,
       (int column) => BoardSquare(position: Position(x: row, y: column), value: oldBoard[row][column].value),
+    ),
+  );
+  return newBoard;
+}
+
+// Helper function to convert an ordered list of numbers into a Board
+List<List<BoardSquare>> convertIntToBoard(List<List<int>> simpleBoard) {
+  List<List<BoardSquare>> newBoard = List.generate(
+    9,
+    (int row) => List.generate(
+      9,
+      (int column) => BoardSquare(position: Position(x: row, y: column), value: simpleBoard[row][column]),
     ),
   );
   return newBoard;
