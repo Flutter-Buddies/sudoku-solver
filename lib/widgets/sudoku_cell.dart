@@ -25,7 +25,7 @@ class SudokuCell extends StatelessWidget {
         height: 40,
         width: 30,
         decoration: BoxDecoration(
-          // color: Colors.blue[200],
+          color: Colors.white,
           border: Border(
             right: BorderSide(
               width:

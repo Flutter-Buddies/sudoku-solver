@@ -11,22 +11,23 @@ class SudokuTable extends StatelessWidget {
       child: Table(
         defaultVerticalAlignment: TableCellVerticalAlignment.middle,
         border: TableBorder(
-          left: BorderSide(
-            width: 3,
-            color: Colors.blueAccent,
-          ),
-          top: BorderSide(
-            width: 3,
-            color: Colors.blueAccent,
-          ),
-        ),
+            // left: BorderSide(
+            //   width: 3,
+            //   color: Colors.blueAccent,
+            // ),
+            // top: BorderSide(
+            //   width: 3,
+            //   color: Colors.blueAccent,
+            // ),
+            ),
         children: List.generate(
           Provider.of<SudokuGrid>(context).height,
           (int rowNumber) => TableRow(
             children: List.generate(
               Provider.of<SudokuGrid>(context).width,
               (int columnNumber) => ChangeNotifierProvider<BoardSquare>.value(
-                value: Provider.of<SudokuGrid>(context).userBoard[rowNumber][columnNumber],
+                value: Provider.of<SudokuGrid>(context).userBoard[rowNumber]
+                    [columnNumber],
                 child: SudokuCell(),
               ),
             ),
