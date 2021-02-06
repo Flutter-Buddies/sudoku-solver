@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider<SudokuGrid>(
       create: (context) => SudokuGrid.fromTemplate(mediumBoard),
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Sudoku Solver',
         theme: ThemeData(
           primarySwatch: Colors.blue,
