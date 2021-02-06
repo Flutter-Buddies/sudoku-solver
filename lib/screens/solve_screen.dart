@@ -13,6 +13,7 @@ class SolveScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         actions: [
           IconButton(
             icon: Icon(Icons.camera),
@@ -68,23 +69,27 @@ class BottomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Widget buttonContent() {
-      if (Provider.of<SudokuGrid>(context).solveScreenStates == SolveScreenStates.Idle &&
+      if (Provider.of<SudokuGrid>(context).solveScreenStates ==
+              SolveScreenStates.Idle &&
           Provider.of<SudokuGrid>(context).boardErrors == BoardErrors.None) {
         return Text(
           'SOLVE!',
           style: TextStyle(color: Colors.white, fontSize: 20),
         );
-      } else if (Provider.of<SudokuGrid>(context).boardErrors == BoardErrors.Duplicate) {
+      } else if (Provider.of<SudokuGrid>(context).boardErrors ==
+          BoardErrors.Duplicate) {
         return Text(
           'Invalid Board',
           style: TextStyle(color: Colors.red, fontSize: 20),
         );
-      } else if (Provider.of<SudokuGrid>(context).boardErrors == BoardErrors.UnSolvable) {
+      } else if (Provider.of<SudokuGrid>(context).boardErrors ==
+          BoardErrors.UnSolvable) {
         return Text(
           'This board cannot be solved',
           style: TextStyle(color: Colors.red, fontSize: 20),
         );
-      } else if (Provider.of<SudokuGrid>(context).solveScreenStates == SolveScreenStates.Solved) {
+      } else if (Provider.of<SudokuGrid>(context).solveScreenStates ==
+          SolveScreenStates.Solved) {
         return Text(
           'SOLVED!',
           style: TextStyle(color: Colors.green, fontSize: 20),
@@ -99,10 +104,12 @@ class BottomButton extends StatelessWidget {
     return RaisedButton(
       color: Colors.blueAccent,
       onPressed: () {
-        final snackBar = SnackBar(duration: Duration(seconds: 2), content: Text('There is an error on the board!'));
+        final snackBar = SnackBar(
+            duration: Duration(seconds: 2),
+            content: Text('There is an error on the board!'));
 
-        Provider.of<SudokuGrid>(context, listen: false)
-            .solveButtonPress(Provider.of<SudokuGrid>(context, listen: false).userBoard);
+        Provider.of<SudokuGrid>(context, listen: false).solveButtonPress(
+            Provider.of<SudokuGrid>(context, listen: false).userBoard);
       },
       child: buttonContent(),
     );

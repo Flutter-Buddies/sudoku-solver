@@ -18,27 +18,40 @@ class SudokuCell extends StatelessWidget {
     return InkWell(
       onTap: () {
         // Update the value of the board square based on the current selected number from the keypad
-        Provider.of<BoardSquare>(context, listen: false)
-            .updateValue(Provider.of<SudokuGrid>(context, listen: false).selectedNumber);
+        Provider.of<BoardSquare>(context, listen: false).updateValue(
+            Provider.of<SudokuGrid>(context, listen: false).selectedNumber);
       },
       child: Container(
         height: 40,
         width: 30,
         decoration: BoxDecoration(
-          color: Colors.blue[200],
+          // color: Colors.blue[200],
           border: Border(
             right: BorderSide(
-              width: (Provider.of<BoardSquare>(context, listen: false).position.y % 3 == 2) ? 3 : 1,
+              width:
+                  (Provider.of<BoardSquare>(context, listen: false).position.y %
+                              3 ==
+                          2)
+                      ? 2
+                      : 0.5,
               color: Colors.blueAccent,
             ),
             bottom: BorderSide(
-              width: (Provider.of<BoardSquare>(context, listen: false).position.x % 3 == 2) ? 3 : 1,
+              width:
+                  (Provider.of<BoardSquare>(context, listen: false).position.x %
+                              3 ==
+                          2)
+                      ? 2
+                      : 0.5,
               color: Colors.blueAccent,
             ),
           ),
         ),
         child: Center(
-          child: Text(getCellValue(Provider.of<BoardSquare>(context).value)),
+          child: Text(
+            getCellValue(Provider.of<BoardSquare>(context).value),
+            style: TextStyle(fontSize: 18),
+          ),
         ),
       ),
     );
