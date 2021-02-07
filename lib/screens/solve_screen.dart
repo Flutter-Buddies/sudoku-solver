@@ -15,10 +15,13 @@ class SolveScreen extends StatelessWidget {
         child: Stack(
           children: [
             // Blue background at top of the screen
-            Container(
-              width: double.infinity,
-              height: 240,
-              color: Colors.blueAccent,
+            // Using [FractionallySizedBox] so that is always takes up ~1/3 of screen height
+            FractionallySizedBox(
+              widthFactor: 1.0,
+              heightFactor: 0.33,
+              child: Container(
+                color: Colors.blueAccent,
+              ),
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -35,7 +38,8 @@ class SolveScreen extends StatelessWidget {
                 ),
                 Spacer(),
                 Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 32, vertical: 16.0),
                   child: KeyPad(),
                 ),
                 Spacer(),

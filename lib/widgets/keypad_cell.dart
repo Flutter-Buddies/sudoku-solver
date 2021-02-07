@@ -3,31 +3,47 @@ import 'package:provider/provider.dart';
 import 'package:sudoku_solver/models/sudoku_grid.dart';
 
 class KeyPadCell extends StatelessWidget {
-  KeyPadCell({this.numberValue});
+  KeyPadCell({@required this.numberValue}) : assert(numberValue >= 0);
   final int numberValue;
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return GestureDetector(
       onTap: () {
         //print(numberValue);
-        Provider.of<SudokuGrid>(context, listen: false).updateSelectedNumber(numberValue);
+        Provider.of<SudokuGrid>(context, listen: false)
+            .updateSelectedNumber(numberValue);
       },
       child: Container(
         height: 40,
         width: 40,
         decoration: BoxDecoration(
-          color: numberValue == Provider.of<SudokuGrid>(context).selectedNumber ? Colors.blueAccent : Colors.blue[200],
-          border: Border.all(color: Colors.black, width: 1),
-        ),
+            color:
+                numberValue == Provider.of<SudokuGrid>(context).selectedNumber
+                    ? Colors.blueAccent
+                    : Colors.transparent,
+            border: Border.all(color: Colors.blueAccent[400], width: 1),
+            borderRadius: BorderRadius.circular(6.0)),
         child: Center(
-          child: FittedBox(
-            fit: BoxFit.fill,
-            child: Text(
-              // Instead of showing the number 0, we want the user to be able to a blank space
-              numberValue == 0 ? 'Remove' : numberValue.toString(),
-            ),
-          ),
+          child: numberValue == 0
+              ? Icon(
+                  Icons.remove,
+                  color: numberValue ==
+                          Provider.of<SudokuGrid>(context).selectedNumber
+                      ? Colors.white
+                      : Colors.blue[900],
+                )
+              : Text(
+                  // Instead of showing the number 0, we want the user to be able to a blank space
+                  numberValue.toString(),
+                  style: TextStyle(
+                    color: numberValue ==
+                            Provider.of<SudokuGrid>(context).selectedNumber
+                        ? Colors.white
+                        : Colors.blue[900],
+                    fontSize: 18,
+                  ),
+                ),
         ),
       ),
     );

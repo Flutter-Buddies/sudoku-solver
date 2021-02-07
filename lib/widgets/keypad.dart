@@ -2,24 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:sudoku_solver/widgets/keypad_cell.dart';
 
 class KeyPad extends StatelessWidget {
-  final int rows = 2;
-  final int columns = 5;
+  static const int rows = 2;
+  static const int columns = 5;
   @override
   Widget build(BuildContext context) {
-    return Table(
-      border: TableBorder.all(
-        width: 3,
-        color: Colors.blueAccent,
-      ),
+    return Wrap(
+      alignment: WrapAlignment.center,
+      spacing: 16.0,
+      runSpacing: 16.0,
       children: List.generate(
-        rows,
-        (int row) => TableRow(
-          children: List.generate(
-            columns,
-            (int column) => KeyPadCell(
-              numberValue: columns * row + column,
-            ),
-          ),
+        rows * columns,
+        (index) => KeyPadCell(
+          numberValue: index,
         ),
       ),
     );
