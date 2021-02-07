@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:sudoku_solver/constants/enums.dart';
-import 'package:sudoku_solver/models/sudoku_grid.dart';
 import 'package:sudoku_solver/widgets/options_row.dart';
 import 'package:sudoku_solver/widgets/solve_button.dart';
 import 'package:sudoku_solver/widgets/sudoku_table.dart';
 import 'package:sudoku_solver/widgets/keypad.dart';
-import 'package:provider/provider.dart';
 
 class SolveScreen extends StatelessWidget {
   @override

@@ -6,10 +6,12 @@ class KeyPad extends StatelessWidget {
   static const int columns = 5;
   @override
   Widget build(BuildContext context) {
+    print('${MediaQuery.of(context).size.height}');
     return Wrap(
       alignment: WrapAlignment.center,
       spacing: 16.0,
-      runSpacing: 16.0,
+      // Reduce vertical spacing if the screen is small
+      runSpacing: MediaQuery.of(context).size.height < 620 ? 8.0 : 16.0,
       children: List.generate(
         rows * columns,
         (index) => KeyPadCell(

@@ -15,8 +15,9 @@ class KeyPadCell extends StatelessWidget {
             .updateSelectedNumber(numberValue);
       },
       child: Container(
-        height: 40,
-        width: 40,
+        // Need to resize the key cells if the screen is too small
+        height: MediaQuery.of(context).size.height < 620 ? 35 : 40,
+        width: MediaQuery.of(context).size.height < 620 ? 35 : 40,
         decoration: BoxDecoration(
             color:
                 numberValue == Provider.of<SudokuGrid>(context).selectedNumber
