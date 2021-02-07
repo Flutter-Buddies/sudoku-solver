@@ -9,27 +9,77 @@ class SolveButton extends StatefulWidget {
 }
 
 class _SolveButtonState extends State<SolveButton> {
+  Widget _buttonWidget;
+  Color _buttonColor;
+
   @override
   Widget build(BuildContext context) {
+    if (context.watch<SudokuGrid>().boardErrors == BoardErrors.UnSolvable) {
+      setState(() {
+        _buttonWidget = Text(
+          'Invalid Puzzle - Unsolvable',
+          style: TextStyle(
+              color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+        );
+        _buttonColor = Colors.red;
+      });
+    } else if (context.watch<SudokuGrid>().boardErrors ==
+        BoardErrors.Duplicate) {
+      setState(() {
+        _buttonWidget = Text(
+          'Invalid Puzzle - Duplicate Number',
+          style: TextStyle(
+              color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+        );
+        _buttonColor = Colors.red;
+      });
+    } else if (context.watch<SudokuGrid>().solveScreenStates ==
+        SolveScreenStates.Loading) {
+      setState(() {
+        _buttonWidget = SizedBox(
+          height: 25,
+          width: 25,
+          child: CircularProgressIndicator(
+            strokeWidth: 3,
+            backgroundColor: Colors.white,
+          ),
+        );
+      });
+    } else if (context.watch<SudokuGrid>().solveScreenStates ==
+        SolveScreenStates.Solved) {
+      setState(() {
+        _buttonWidget = Text(
+          'Solved',
+          style: TextStyle(
+              color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+        );
+        _buttonColor = Colors.green;
+      });
+    } else {
+      setState(() {
+        _buttonWidget = Text(
+          'Solve',
+          style: TextStyle(
+              color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+        );
+        _buttonColor = Colors.blueAccent;
+      });
+    }
     return GestureDetector(
       onTap: () {
-        Provider.of<SudokuGrid>(context, listen: false).solveButtonPress(
-            Provider.of<SudokuGrid>(context, listen: false).userBoard);
+        context
+            .read<SudokuGrid>()
+            .solveButtonPress(context.read<SudokuGrid>().userBoard);
       },
       child: Container(
         padding: EdgeInsets.all(12.0),
         width: double.infinity,
+        height: 48,
         decoration: BoxDecoration(
-          color: Colors.blueAccent,
+          color: _buttonColor,
           borderRadius: BorderRadius.circular(4.0),
         ),
-        child: Center(
-          child: Text(
-            'Solve',
-            style: TextStyle(
-                color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-        ),
+        child: Center(child: _buttonWidget),
       ),
     );
   }

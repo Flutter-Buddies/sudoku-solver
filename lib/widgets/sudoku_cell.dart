@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sudoku_solver/constants/enums.dart';
 import 'package:sudoku_solver/models/board_square.dart';
 import 'package:sudoku_solver/models/sudoku_grid.dart';
 
@@ -20,6 +21,10 @@ class SudokuCell extends StatelessWidget {
         // Update the value of the board square based on the current selected number from the keypad
         Provider.of<BoardSquare>(context, listen: false).updateValue(
             Provider.of<SudokuGrid>(context, listen: false).selectedNumber);
+        Provider.of<SudokuGrid>(context, listen: false).boardErrors =
+            BoardErrors.None;
+        Provider.of<SudokuGrid>(context, listen: false).solveScreenStates =
+            SolveScreenStates.Idle;
       },
       child: Container(
         height: 40,
