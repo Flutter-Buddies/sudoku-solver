@@ -17,7 +17,7 @@ class SudokuTable extends StatelessWidget {
         // border: Border.all(color: Colors.blueAccent, width: 2),
         boxShadow: [
           BoxShadow(
-            color: Colors.blue[900].withOpacity(0.4),
+            color: Colors.blue[900].withOpacity(0.3),
             offset: Offset(0, 12),
             blurRadius: 12,
             spreadRadius: 5,
