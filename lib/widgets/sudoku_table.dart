@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:sudoku_solver/models/sudoku_grid.dart';
 
 class SudokuTable extends StatelessWidget {
-  static const _borderRadius = 10.0;
+  static const _borderRadius = 15.0;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -14,7 +14,7 @@ class SudokuTable extends StatelessWidget {
         borderRadius: BorderRadius.all(
           Radius.circular(_borderRadius),
         ),
-        border: Border.all(color: Colors.blueAccent, width: 2),
+        // border: Border.all(color: Colors.blueAccent, width: 2),
         boxShadow: [
           BoxShadow(
             color: Colors.grey.withOpacity(0.6),
@@ -32,16 +32,6 @@ class SudokuTable extends StatelessWidget {
         child: Container(
           child: Table(
             defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-            border: TableBorder(
-                // left: BorderSide(
-                //   width: 3,
-                //   color: Colors.blueAccent,
-                // ),
-                // top: BorderSide(
-                //   width: 3,
-                //   color: Colors.blueAccent,
-                // ),
-                ),
             children: List.generate(
               Provider.of<SudokuGrid>(context, listen: false).height,
               (int rowNumber) => TableRow(

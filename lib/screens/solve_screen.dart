@@ -1,65 +1,80 @@
 import 'package:flutter/material.dart';
 import 'package:sudoku_solver/constants/enums.dart';
 import 'package:sudoku_solver/models/sudoku_grid.dart';
+import 'package:sudoku_solver/widgets/secondary_button.dart';
 import 'package:sudoku_solver/widgets/sudoku_table.dart';
 import 'package:sudoku_solver/widgets/keypad.dart';
 import 'package:provider/provider.dart';
 
 class SolveScreen extends StatelessWidget {
-  final int width = 9;
-  final int height = 9;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        actions: [
-          IconButton(
-            icon: Icon(Icons.camera),
-            onPressed: () {
-              // open camera to take picture of sudoku puzzle
-            },
-          ),
-          IconButton(
-              icon: Icon(Icons.refresh),
-              onPressed: () {
-                Provider.of<SudokuGrid>(context, listen: false).resetBoard();
-              })
-        ],
-        title: Text('Solve Screen'),
-        centerTitle: true,
-      ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: SudokuTable(),
-          ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: KeyPad(),
+      body: SafeArea(
+        bottom: false,
+        child: Stack(
+          children: [
+            // Blue background at top of the screen
+            Container(
+              width: double.infinity,
+              height: 240,
+              color: Colors.blueAccent,
             ),
-          ),
-          Expanded(
-            child: Align(
-              alignment: Alignment.bottomCenter,
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Container(
-                  height: 50,
-                  width: double.infinity,
-                  child: BottomButton(),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: SecondaryButton(
+                          onTap: () {},
+                          label: 'Something else',
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: SecondaryButton(
+                          onTap: () => context.read<SudokuGrid>().resetBoard(),
+                          label: 'Reset',
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: SudokuTable(),
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: KeyPad(),
+                  ),
+                ),
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Container(
+                        height: 50,
+                        width: double.infinity,
+                        child: BottomButton(),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+              ],
             ),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

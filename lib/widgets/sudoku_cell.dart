@@ -27,6 +27,9 @@ class SudokuCell extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.white,
           border: Border(
+            // Right and bottom border to be thicker for 2nd and 5th index
+            // Along with the table outer border this creates the inner and outer grids
+            // Todo: Figure out a way to not have a border on bottom and right side of table
             right: BorderSide(
               width: (Provider.of<BoardSquare>(context, listen: false)
                               .position
@@ -36,7 +39,7 @@ class SudokuCell extends StatelessWidget {
                               .position
                               .y ==
                           5)
-                  ? 2
+                  ? 1.5
                   : 0.5,
               color: Colors.blueAccent,
             ),
@@ -49,7 +52,7 @@ class SudokuCell extends StatelessWidget {
                               .position
                               .x ==
                           5)
-                  ? 2
+                  ? 1.5
                   : 0.5,
               color: Colors.blueAccent,
             ),
@@ -58,7 +61,7 @@ class SudokuCell extends StatelessWidget {
         child: Center(
           child: Text(
             getCellValue(Provider.of<BoardSquare>(context).value),
-            style: TextStyle(fontSize: 18),
+            style: TextStyle(fontSize: 18, color: Colors.blue[900]),
           ),
         ),
       ),
