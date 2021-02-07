@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sudoku_solver/widgets/animated_solve_button.dart';
 import 'package:sudoku_solver/widgets/options_row.dart';
 import 'package:sudoku_solver/widgets/solve_button.dart';
 import 'package:sudoku_solver/widgets/sudoku_table.dart';
@@ -50,8 +51,8 @@ class SolveScreen extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(
-                      horizontal: 16.0, vertical: 16.0),
-                  child: SolveButton(),
+                      horizontal: 32.0, vertical: 16.0),
+                  child: AnimatedSolveButton(),
                 ),
               ],
             ),

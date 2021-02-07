@@ -84,6 +84,7 @@ class _SolveButtonState extends State<SolveButton> {
     );
   }
 }
+// Todo: Need a way of resetting state when the board is edited
 
 //* Old version for reference
 class BottomButton extends StatelessWidget {
