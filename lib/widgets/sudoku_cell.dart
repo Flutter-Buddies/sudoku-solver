@@ -28,21 +28,29 @@ class SudokuCell extends StatelessWidget {
           color: Colors.white,
           border: Border(
             right: BorderSide(
-              width:
-                  (Provider.of<BoardSquare>(context, listen: false).position.y %
-                              3 ==
-                          2)
-                      ? 2
-                      : 0.5,
+              width: (Provider.of<BoardSquare>(context, listen: false)
+                              .position
+                              .y ==
+                          2 ||
+                      Provider.of<BoardSquare>(context, listen: false)
+                              .position
+                              .y ==
+                          5)
+                  ? 2
+                  : 0.5,
               color: Colors.blueAccent,
             ),
             bottom: BorderSide(
-              width:
-                  (Provider.of<BoardSquare>(context, listen: false).position.x %
-                              3 ==
-                          2)
-                      ? 2
-                      : 0.5,
+              width: (Provider.of<BoardSquare>(context, listen: false)
+                              .position
+                              .x ==
+                          2 ||
+                      Provider.of<BoardSquare>(context, listen: false)
+                              .position
+                              .x ==
+                          5)
+                  ? 2
+                  : 0.5,
               color: Colors.blueAccent,
             ),
           ),
