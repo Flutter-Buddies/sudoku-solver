@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        initialRoute: 'home',
+        initialRoute: 'solve',
         routes: {
           'home': (context) => MyHomePage(),
           'solve': (context) => SolveScreen(),

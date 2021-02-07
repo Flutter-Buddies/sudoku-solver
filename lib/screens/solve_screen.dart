@@ -35,31 +35,7 @@ class SolveScreen extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.green[100],
-                borderRadius: BorderRadius.all(
-                  Radius.circular(15),
-                ),
-                border: Border.all(color: Colors.blueAccent, width: 2),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.6),
-                    offset: Offset(0, 12),
-                    blurRadius: 10,
-                    spreadRadius: 4,
-                  ),
-                ],
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(15),
-                ),
-                child: Container(
-                  child: SudokuTable(),
-                ),
-              ),
-            ),
+            child: SudokuTable(),
           ),
           Expanded(
             child: Padding(
