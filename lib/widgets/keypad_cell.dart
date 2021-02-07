@@ -23,11 +23,11 @@ class KeyPadCell extends StatelessWidget {
                     ? Colors.blueAccent
                     : Colors.transparent,
             border: Border.all(color: Colors.blueAccent[400], width: 1),
-            borderRadius: BorderRadius.circular(6.0)),
+            borderRadius: BorderRadius.circular(8.0)),
         child: Center(
           child: numberValue == 0
               ? Icon(
-                  Icons.remove,
+                  Icons.auto_fix_normal,
                   color: numberValue ==
                           Provider.of<SudokuGrid>(context).selectedNumber
                       ? Colors.white

@@ -10,7 +10,7 @@ class OptionsRow extends StatelessWidget {
       children: [
         Expanded(
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: SecondaryButton(
               onTap: () {},
               label: 'Something else',
@@ -19,7 +19,7 @@ class OptionsRow extends StatelessWidget {
         ),
         Expanded(
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: SecondaryButton(
               onTap: () => context.read<SudokuGrid>().resetBoard(),
               label: 'Reset',

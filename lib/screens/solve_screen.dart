@@ -26,7 +26,9 @@ class SolveScreen extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Spacer(),
+                Spacer(
+                  flex: 3,
+                ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: OptionsRow(),
@@ -36,15 +38,19 @@ class SolveScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: SudokuTable(),
                 ),
-                Spacer(),
+                Spacer(
+                  flex: 3,
+                ),
                 Padding(
                   padding: const EdgeInsets.symmetric(
-                      horizontal: 32, vertical: 16.0),
+                    horizontal: 48,
+                  ),
                   child: KeyPad(),
                 ),
                 Spacer(),
                 Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 16.0, vertical: 16.0),
                   child: Container(
                     height: 50,
                     width: double.infinity,
@@ -68,7 +74,7 @@ class BottomButton extends StatelessWidget {
               SolveScreenStates.Idle &&
           Provider.of<SudokuGrid>(context).boardErrors == BoardErrors.None) {
         return Text(
-          'SOLVE!',
+          'Solve!',
           style: TextStyle(color: Colors.white, fontSize: 20),
         );
       } else if (Provider.of<SudokuGrid>(context).boardErrors ==
