@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sudoku_solver/constants/enums.dart';
 import 'package:sudoku_solver/models/sudoku_grid.dart';
-import 'package:sudoku_solver/widgets/secondary_button.dart';
+import 'package:sudoku_solver/widgets/options_row.dart';
 import 'package:sudoku_solver/widgets/sudoku_table.dart';
 import 'package:sudoku_solver/widgets/keypad.dart';
 import 'package:provider/provider.dart';
@@ -23,53 +23,29 @@ class SolveScreen extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Row(
-                  children: [
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: SecondaryButton(
-                          onTap: () {},
-                          label: 'Something else',
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: SecondaryButton(
-                          onTap: () => context.read<SudokuGrid>().resetBoard(),
-                          label: 'Reset',
-                        ),
-                      ),
-                    ),
-                  ],
+                Spacer(),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: OptionsRow(),
                 ),
+                Spacer(),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: SudokuTable(),
                 ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: KeyPad(),
-                  ),
+                Spacer(),
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: KeyPad(),
                 ),
-                Expanded(
-                  child: Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Container(
-                        height: 50,
-                        width: double.infinity,
-                        child: BottomButton(),
-                      ),
-                    ),
+                Spacer(),
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Container(
+                    height: 50,
+                    width: double.infinity,
+                    child: BottomButton(),
                   ),
-                ),
-                SizedBox(
-                  height: 20,
                 ),
               ],
             ),

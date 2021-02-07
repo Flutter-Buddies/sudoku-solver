@@ -17,10 +17,10 @@ class SudokuTable extends StatelessWidget {
         // border: Border.all(color: Colors.blueAccent, width: 2),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.6),
+            color: Colors.blue[900].withOpacity(0.4),
             offset: Offset(0, 12),
-            blurRadius: 10,
-            spreadRadius: 4,
+            blurRadius: 12,
+            spreadRadius: 5,
           ),
         ],
       ),
