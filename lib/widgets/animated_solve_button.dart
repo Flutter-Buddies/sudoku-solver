@@ -26,6 +26,8 @@ class _AnimatedSolveButtonState extends State<AnimatedSolveButton>
   AnimationController _sliderThumbController;
   Animation<double> _loadingAnimation;
   AnimationController _loadingController;
+  Animation<double> _backgroundSliderAnimation;
+  AnimationController _backgroundSliderController;
 
   @override
   void initState() {
@@ -35,7 +37,7 @@ class _AnimatedSolveButtonState extends State<AnimatedSolveButton>
     _sliderText = '    Slide to solve >>>';
     _borderColor = Colors.blueAccent;
 
-    // Initialise slider thumb animations
+    // Initialise slider thumb animation
     _sliderThumbController =
         AnimationController(duration: Duration(milliseconds: 500), vsync: this);
     _sliderThumbAnimation = Tween(begin: 1.0, end: 0.0).animate(CurvedAnimation(
@@ -63,6 +65,9 @@ class _AnimatedSolveButtonState extends State<AnimatedSolveButton>
         _loadingController.forward();
       }
     });
+
+    // Initialise background slider animation
+    _backgroundSliderController = AnimationController(vsync: this);
   }
 
   @override
@@ -81,12 +86,12 @@ class _AnimatedSolveButtonState extends State<AnimatedSolveButton>
       if (_animationHasPlayed == true) {
         _sliderThumbController.reverse();
         _animationHasPlayed = false;
+        _loadingController.reset();
       }
       setState(() {
         _sliderText = '    Slide to solve >>>';
         _borderColor = Colors.blueAccent;
       });
-      _loadingController.reset();
     }
 
     if (context.watch<SudokuGrid>().solveScreenStates ==
@@ -150,7 +155,13 @@ class _AnimatedSolveButtonState extends State<AnimatedSolveButton>
             child: context.watch<SudokuGrid>().solveScreenStates ==
                     SolveScreenStates.Loading
                 ? SizedBox(
-                    width: 30, height: 30, child: CircularProgressIndicator())
+                    width: 30,
+                    height: 30,
+                    child: Theme(
+                        data: Theme.of(context)
+                            .copyWith(accentColor: Colors.blueAccent),
+                        child: CircularProgressIndicator()),
+                  )
                 : Text(
                     _sliderText,
                     style: TextStyle(
@@ -181,7 +192,7 @@ class _AnimatedSolveButtonState extends State<AnimatedSolveButton>
                 setState(() {
                   _currentSliderValue = value;
                 });
-                // _bgColorController.value = value / 100;
+                // _loadingController.animateTo(value);
               },
               onChangeEnd: (double value) async {
                 if (value > _threshold) {
@@ -193,6 +204,8 @@ class _AnimatedSolveButtonState extends State<AnimatedSolveButton>
 
                   // Wait for the animation to complete before calling the function
                   await Future.delayed(_sliderThumbController.duration);
+
+                  // Set the animation to complete
                   _animationHasPlayed = true;
 
                   // Reset
