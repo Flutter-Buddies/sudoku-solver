@@ -54,6 +54,7 @@ class SolveScreen extends StatelessWidget {
                       horizontal: 32.0, vertical: 16.0),
                   child: AnimatedSolveButton(),
                 ),
+                Spacer(),
               ],
             ),
           ],

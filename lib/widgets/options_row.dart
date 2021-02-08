@@ -26,6 +26,7 @@ class OptionsRow extends StatelessWidget {
                 // ignore: deprecated_member_use
                 Scaffold.of(context).showSnackBar(
                     SnackBar(content: Text('Feature coming soon!')));
+                // Todo: Implement image recognition functionality
               },
               label: 'Take picture',
               icon: Icons.camera,
