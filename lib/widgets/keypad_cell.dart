@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:sudoku_solver/models/sudoku_grid.dart';
 
@@ -28,7 +29,7 @@ class KeyPadCell extends StatelessWidget {
         child: Center(
           child: numberValue == 0
               ? Icon(
-                  Icons.auto_fix_normal,
+                  FontAwesome.eraser,
                   color: numberValue ==
                           Provider.of<SudokuGrid>(context).selectedNumber
                       ? Colors.white

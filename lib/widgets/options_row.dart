@@ -12,8 +12,9 @@ class OptionsRow extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: SecondaryButton(
-              onTap: () {},
-              label: 'Something else',
+              onTap: () => context.read<SudokuGrid>().resetBoard(),
+              label: 'Reset',
+              icon: Icons.refresh_outlined,
             ),
           ),
         ),
@@ -21,8 +22,9 @@ class OptionsRow extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: SecondaryButton(
-              onTap: () => context.read<SudokuGrid>().resetBoard(),
-              label: 'Reset',
+              onTap: () {},
+              label: 'Take picture',
+              icon: Icons.camera,
             ),
           ),
         ),

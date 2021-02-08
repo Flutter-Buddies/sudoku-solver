@@ -21,7 +21,7 @@ class _AnimatedSolveButtonState extends State<AnimatedSolveButton> {
             child: Container(
               margin: EdgeInsets.symmetric(horizontal: 8),
               decoration: BoxDecoration(
-                color: Colors.blueAccent.withOpacity(0.2),
+                color: Colors.blueAccent.withOpacity(_currentSliderValue / 100),
                 border: Border.all(
                   color: Colors.blueAccent,
                   width: 2,
@@ -41,7 +41,7 @@ class _AnimatedSolveButtonState extends State<AnimatedSolveButton> {
               activeTrackColor: Colors.transparent,
               inactiveTrackColor: Colors.transparent,
               thumbShape: CustomSliderThumbCircle(
-                  thumbRadius: (_height / 2) + 2, thumbColor: Colors.blue),
+                  thumbRadius: (_height / 2) + 3, thumbColor: Colors.blue),
             ),
             child: Slider(
               value: _currentSliderValue,

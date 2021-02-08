@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 class SecondaryButton extends StatelessWidget {
   final Function onTap;
   final String label;
-  SecondaryButton({@required this.onTap, @required this.label});
+  final IconData icon;
+  SecondaryButton(
+      {@required this.onTap, @required this.label, @required this.icon});
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -17,9 +19,23 @@ class SecondaryButton extends StatelessWidget {
           border: Border.all(color: Colors.white.withOpacity(0.7)),
         ),
         child: Center(
-          child: Text(
-            label,
-            style: TextStyle(color: Colors.white.withOpacity(0.7)),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Icon(
+                icon,
+                size: 20,
+                color: Colors.white.withOpacity(0.7),
+              ),
+              SizedBox(
+                width: 4,
+              ),
+              Text(
+                label,
+                style: TextStyle(color: Colors.white.withOpacity(0.7)),
+              ),
+            ],
           ),
         ),
       ),
