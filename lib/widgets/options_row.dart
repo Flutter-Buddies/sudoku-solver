@@ -22,7 +22,11 @@ class OptionsRow extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: SecondaryButton(
-              onTap: () {},
+              onTap: () {
+                // ignore: deprecated_member_use
+                Scaffold.of(context).showSnackBar(
+                    SnackBar(content: Text('Feature coming soon!')));
+              },
               label: 'Take picture',
               icon: Icons.camera,
             ),

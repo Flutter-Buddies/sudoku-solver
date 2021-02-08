@@ -29,7 +29,7 @@ class KeyPadCell extends StatelessWidget {
         child: Center(
           child: numberValue == 0
               ? Icon(
-                  FontAwesome.eraser,
+                  Entypo.eraser,
                   color: numberValue ==
                           Provider.of<SudokuGrid>(context).selectedNumber
                       ? Colors.white
