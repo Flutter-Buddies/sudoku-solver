@@ -10,6 +10,7 @@ class SudokuGrid extends ChangeNotifier {
   int width;
   int height;
   int selectedNumber = 0;
+  // Todo: Have a solved screen state of error
   SolveScreenStates solveScreenStates = SolveScreenStates.Idle;
   BoardErrors boardErrors = BoardErrors.None;
 
@@ -22,7 +23,8 @@ class SudokuGrid extends ChangeNotifier {
       rowCount,
       (int row) => List.generate(
         columnCount,
-        (int column) => BoardSquare(position: Position(x: row, y: column), value: 0),
+        (int column) =>
+            BoardSquare(position: Position(x: row, y: column), value: 0),
       ),
     );
     this.width = rowCount;
@@ -161,7 +163,8 @@ Position getNextEmptySquare(List<BoardSquare> flatBoard) {
 }
 
 // Helper function to fill a given position with the numbers 1 - 9 and return the list of Boards
-List<List<List<BoardSquare>>> createNewBoards(Position position, List<List<BoardSquare>> board) {
+List<List<List<BoardSquare>>> createNewBoards(
+    Position position, List<List<BoardSquare>> board) {
   // Variable to hold new boards
   List<List<List<BoardSquare>>> updatedBoards = [];
 
@@ -267,7 +270,9 @@ List<List<BoardSquare>> createNewBoard(List<List<BoardSquare>> oldBoard) {
     9,
     (int row) => List.generate(
       9,
-      (int column) => BoardSquare(position: Position(x: row, y: column), value: oldBoard[row][column].value),
+      (int column) => BoardSquare(
+          position: Position(x: row, y: column),
+          value: oldBoard[row][column].value),
     ),
   );
   return newBoard;
@@ -279,7 +284,9 @@ List<List<BoardSquare>> convertIntToBoard(List<List<int>> simpleBoard) {
     9,
     (int row) => List.generate(
       9,
-      (int column) => BoardSquare(position: Position(x: row, y: column), value: simpleBoard[row][column]),
+      (int column) => BoardSquare(
+          position: Position(x: row, y: column),
+          value: simpleBoard[row][column]),
     ),
   );
   return newBoard;
