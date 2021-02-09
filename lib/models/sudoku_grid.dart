@@ -4,13 +4,13 @@ import 'package:sudoku_solver/models/board_square.dart';
 import 'package:sudoku_solver/models/position_model.dart';
 import 'dart:async';
 import 'package:flutter/foundation.dart';
+import 'solve_functions.dart' as solve;
 
 class SudokuGrid extends ChangeNotifier {
   List<List<BoardSquare>> userBoard;
   int width;
   int height;
   int selectedNumber = 0;
-  // Todo: Have a solved screen state of error
   SolveScreenStates solveScreenStates = SolveScreenStates.Idle;
   BoardErrors boardErrors = BoardErrors.None;
 
@@ -25,12 +25,15 @@ class SudokuGrid extends ChangeNotifier {
         columnCount,
         (int column) =>
             BoardSquare(position: Position(x: row, y: column), value: 0),
+        growable: false,
       ),
+      growable: false,
     );
     this.width = rowCount;
     this.height = columnCount;
   }
 
+  // Named constructor to build a board from a template (see lib/constants/example_bards.dart)
   SudokuGrid.fromTemplate(List<List<BoardSquare>> templateBoard) {
     userBoard = templateBoard;
     this.width = 9;
@@ -38,6 +41,7 @@ class SudokuGrid extends ChangeNotifier {
   }
 
   // Cycle through each board square and set it's value to 0
+  // And update any board states; selectedNumber, state, errors
   void resetBoard() {
     userBoard.forEach((row) {
       row.forEach((boardSquare) {
@@ -50,12 +54,18 @@ class SudokuGrid extends ChangeNotifier {
     notifyListeners();
   }
 
+  // Setter to update the board variable
   set updateUIBoard(List<List<BoardSquare>> board) {
     this.userBoard = board;
     notifyListeners();
   }
 
+  // 'Parent' function to call when a user selects to solve board
+  // Async function as it will take time to complete
+  // Returns void as the method updates the instance varable `userBoard`
   Future<void> solveButtonPress(List<List<BoardSquare>> board) async {
+    // If on first pass the board is illegal we should show which numbers
+    // are the offending ones
     if (checkLegal(board) == false) {
       solveScreenStates = SolveScreenStates.Error;
       boardErrors = BoardErrors.Duplicate;
@@ -94,6 +104,8 @@ class SudokuGrid extends ChangeNotifier {
 
   void updateSelectedNumber(int newNumber) {
     this.selectedNumber = newNumber;
+    solveScreenStates = SolveScreenStates.Idle;
+    boardErrors = BoardErrors.None;
     notifyListeners();
   }
 
