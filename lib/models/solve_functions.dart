@@ -6,8 +6,7 @@ bool checkLegal(List<List<int>> board) {
       _createThreeXThreeSubSet(board);
 
   // 2. Iterate through each subset and make sure there are no duplicate values (except for 0's)
-  // Variable to hold if there are duplicates. Default to true.
-  var isUnique = true;
+  var isUnique = true; // Variable to hold if there are duplicates.
   for (List<int> list in subsets) {
     // Compare a single value in a list against the other values
     List<int> set = [];
@@ -22,6 +21,11 @@ bool checkLegal(List<List<int>> board) {
       } else {
         set.add(square);
       }
+    }
+    // Todo: Test this
+    // If at any point isUnique is equal to false the loop should be broken
+    if (isUnique == false) {
+      break;
     }
   }
   return isUnique;

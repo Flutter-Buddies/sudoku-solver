@@ -64,9 +64,18 @@ class SudokuGrid extends ChangeNotifier {
   // Async function as it will take time to complete
   // Returns void as the method updates the instance varable `userBoard`
   Future<void> solveButtonPress(List<List<BoardSquare>> board) async {
+    // First and only once convert the board into a list of ints
+    List<List<int>> simpleBoard = List.generate(
+      9,
+      (int row) => List.generate(
+        9,
+        (int column) => board[row][column].value,
+      ),
+    );
+
     // If on first pass the board is illegal we should show which numbers
     // are the offending ones
-    if (checkLegal(board) == false) {
+    if (solve.checkLegal(simpleBoard) == false) {
       solveScreenStates = SolveScreenStates.Error;
       boardErrors = BoardErrors.Duplicate;
       notifyListeners();
@@ -75,13 +84,6 @@ class SudokuGrid extends ChangeNotifier {
       solveScreenStates = SolveScreenStates.Loading;
       notifyListeners();
       // Create list of ints from board to be passed into compute function
-      List<List<int>> simpleBoard = List.generate(
-        9,
-        (int row) => List.generate(
-          9,
-          (int column) => board[row][column].value,
-        ),
-      );
 
       List<List<BoardSquare>> result = await compute(solveBoard, simpleBoard);
       if (result != null) {
