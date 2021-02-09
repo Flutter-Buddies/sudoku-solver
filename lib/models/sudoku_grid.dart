@@ -57,6 +57,7 @@ class SudokuGrid extends ChangeNotifier {
 
   Future<void> solveButtonPress(List<List<BoardSquare>> board) async {
     if (checkLegal(board) == false) {
+      solveScreenStates = SolveScreenStates.Error;
       boardErrors = BoardErrors.Duplicate;
       notifyListeners();
     } else {
@@ -78,7 +79,7 @@ class SudokuGrid extends ChangeNotifier {
         solveScreenStates = SolveScreenStates.Solved;
         notifyListeners();
       } else {
-        solveScreenStates = SolveScreenStates.Idle;
+        solveScreenStates = SolveScreenStates.Error;
         boardErrors = BoardErrors.UnSolvable;
         notifyListeners();
       }

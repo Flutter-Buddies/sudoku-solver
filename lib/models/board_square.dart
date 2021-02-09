@@ -5,17 +5,20 @@ class BoardSquare extends ChangeNotifier {
   Position position;
   int value;
   bool userInputted;
+  bool hasError;
+
+  BoardSquare({
+    @required this.position,
+    @required this.value,
+    this.userInputted = false,
+    this.hasError = false,
+  });
 
   void updateValue(int i) {
     value = i;
     userInputted = true;
     notifyListeners();
   }
-
-  BoardSquare(
-      {@required this.position,
-      @required this.value,
-      this.userInputted = false});
 
   String toString() {
     return value.toString();
