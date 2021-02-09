@@ -1,5 +1,4 @@
 bool checkLegal(List<List<int>> board) {
-  print('Using new check legal');
   // 1. Create a list of rows, columns and 3x3 grids
   List<List<int>> subsets = _createRowSubSet(board) +
       _createColumnSubSet(board) +

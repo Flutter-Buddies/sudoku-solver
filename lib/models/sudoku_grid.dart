@@ -5,6 +5,7 @@ import 'package:sudoku_solver/models/position_model.dart';
 import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'check_legal_fn.dart' as legal;
+import 'solve_fn.dart' as solve;
 
 class SudokuGrid extends ChangeNotifier {
   List<List<BoardSquare>> userBoard;
@@ -84,9 +85,10 @@ class SudokuGrid extends ChangeNotifier {
       solveScreenStates = SolveScreenStates.Loading;
       notifyListeners();
 
-      List<List<BoardSquare>> result = await compute(solveBoard, simpleBoard);
+      List<List<int>> result = await compute(solve.solveBoard, simpleBoard);
+      print('Result: $result');
       if (result != null) {
-        userBoard = result;
+        // userBoard = result;
         solveScreenStates = SolveScreenStates.Solved;
         notifyListeners();
       } else {
@@ -155,13 +157,15 @@ List<List<BoardSquare>> solveBoard(List<List<int>> simpleBoard) {
       if (hasBlanks(board) == false) {
         return board;
       } else {
-        List<List<BoardSquare>> unsolvedBoard = solveBoard(List.generate(
-          9,
-          (int row) => List.generate(
+        List<List<BoardSquare>> unsolvedBoard = solveBoard(
+          List.generate(
             9,
-            (int column) => board[row][column].value,
+            (int row) => List.generate(
+              9,
+              (int column) => board[row][column].value,
+            ),
           ),
-        ));
+        );
         if (unsolvedBoard != null) {
           return unsolvedBoard;
         }
