@@ -4,7 +4,7 @@ import 'package:sudoku_solver/models/board_square.dart';
 import 'package:sudoku_solver/models/position_model.dart';
 import 'dart:async';
 import 'package:flutter/foundation.dart';
-import 'solve_functions.dart' as solve;
+import 'check_legal_fn.dart' as legal;
 
 class SudokuGrid extends ChangeNotifier {
   List<List<BoardSquare>> userBoard;
@@ -75,7 +75,7 @@ class SudokuGrid extends ChangeNotifier {
 
     // If on first pass the board is illegal we should show which numbers
     // are the offending ones
-    if (solve.checkLegal(simpleBoard) == false) {
+    if (legal.checkLegal(simpleBoard) == false) {
       solveScreenStates = SolveScreenStates.Error;
       boardErrors = BoardErrors.Duplicate;
       notifyListeners();
@@ -83,7 +83,6 @@ class SudokuGrid extends ChangeNotifier {
       boardErrors = BoardErrors.None;
       solveScreenStates = SolveScreenStates.Loading;
       notifyListeners();
-      // Create list of ints from board to be passed into compute function
 
       List<List<BoardSquare>> result = await compute(solveBoard, simpleBoard);
       if (result != null) {
