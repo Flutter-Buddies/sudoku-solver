@@ -66,7 +66,10 @@ class SudokuGrid extends ChangeNotifier {
   // Returns void as the method updates the instance varable `userBoard`
   Future<void> solveButtonPress(List<List<BoardSquare>> board) async {
     // First and only once convert the board into a list of ints
-    List<List<int>> intBoard = convertBoardToInts(board);
+    List<List<int>> intBoard = _convertBoardToInts(board);
+
+    // Store locations of user inputted numbers
+    List<Position> positions = _userInputtedNumbers(board);
 
     // If on first pass the board is illegal we should show which numbers
     // are the offending ones
@@ -84,7 +87,12 @@ class SudokuGrid extends ChangeNotifier {
       print('Result: $result');
       if (result != null) {
         // Convert the list of ints back to a board and set userBoard to result
-        userBoard = convertIntsToBoard(result);
+        userBoard = _convertIntsToBoard(result);
+
+        // Iterate through stored numbers and update `userBoard` so user inputted
+        // numbers can be highlighted
+        _updateUserInputtedNumbers(positions, userBoard);
+
         solveScreenStates = SolveScreenStates.Solved;
         notifyListeners();
       } else {
@@ -97,7 +105,7 @@ class SudokuGrid extends ChangeNotifier {
   }
 
   // Helper function to convert board to list of ints
-  List<List<int>> convertBoardToInts(List<List<BoardSquare>> board) {
+  List<List<int>> _convertBoardToInts(List<List<BoardSquare>> board) {
     List<List<int>> intBoard = List.generate(
       9,
       (int row) => List.generate(
@@ -109,7 +117,7 @@ class SudokuGrid extends ChangeNotifier {
   }
 
   // Helper function to convert list of ints to a board
-  List<List<BoardSquare>> convertIntsToBoard(List<List<int>> board) {
+  List<List<BoardSquare>> _convertIntsToBoard(List<List<int>> board) {
     List<List<BoardSquare>> newBoard = List.generate(
       9,
       (int row) => List.generate(
@@ -119,6 +127,34 @@ class SudokuGrid extends ChangeNotifier {
       ),
     );
     return newBoard;
+  }
+
+  List<Position> _userInputtedNumbers(List<List<BoardSquare>> board) {
+    List<Position> userInputtedPositions = [];
+    // Iterate through rows then square to get all squares where there is a value and get it's position
+    for (List<BoardSquare> row in board) {
+      for (BoardSquare square in row) {
+        if (square.value != 0) {
+          userInputtedPositions.add(square.position);
+        }
+      }
+    }
+    print('All user inputted positions: $userInputtedPositions');
+    return userInputtedPositions;
+  }
+
+  void _updateUserInputtedNumbers(
+      List<Position> positions, List<List<BoardSquare>> board) {
+    // Iterate through each board square
+    for (List<BoardSquare> row in board) {
+      for (BoardSquare square in row) {
+        // Update user inputted to true if the square's position object
+        // matches a position object in the list (thanks Equatable)
+        if (positions.contains(square.position)) {
+          square.userInputted = true;
+        }
+      }
+    }
   }
 
   // Get a specific board square given a coordinate

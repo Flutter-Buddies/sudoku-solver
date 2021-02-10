@@ -114,7 +114,7 @@ class _AnimatedSolveButtonState extends State<AnimatedSolveButton>
     if (context.watch<SudokuGrid>().boardErrors == BoardErrors.Duplicate) {
       setState(() {
         _borderColor = Colors.red;
-        _sliderText = 'Invalid Board';
+        _sliderText = 'Invalid Board - Duplicate Number';
       });
       _loadingController.reset();
     }

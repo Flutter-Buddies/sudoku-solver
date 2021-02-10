@@ -70,7 +70,7 @@ class SudokuCell extends StatelessWidget {
                 fontSize: 18,
                 color: Colors.blue[900],
                 fontWeight: context.watch<BoardSquare>().userInputted
-                    ? FontWeight.bold
+                    ? FontWeight.w900
                     : FontWeight.normal),
           ),
         ),
