@@ -68,7 +68,9 @@ class SudokuCell extends StatelessWidget {
             getCellValue(Provider.of<BoardSquare>(context).value),
             style: TextStyle(
                 fontSize: 18,
-                color: Colors.blue[900],
+                color: context.watch<BoardSquare>().hasError
+                    ? Colors.red
+                    : Colors.blue[900],
                 fontWeight: context.watch<BoardSquare>().userInputted
                     ? FontWeight.w900
                     : FontWeight.normal),

@@ -79,20 +79,34 @@ bool hasBlanks(List<List<BoardSquare>> board) {
 }
 
 // Function to check that each sublist has a unique number
-bool checkLegal(List<List<BoardSquare>> board) {
+// Returns a List where the 0th element is a bool and the 1st element is
+// a list of Position objects
+List<dynamic> checkLegal(List<List<BoardSquare>> board) {
   List<List<BoardSquare>> subsets = createFullSublist(board);
-  bool isUnique = true;
+  var isUnique = [
+    true,
+    [Position(), Position()]
+  ];
   for (List<BoardSquare> boardList in subsets) {
     List<int> set = [];
+    List<BoardSquare> newSet = [];
     // Check if values are unique in a given sublist
-    // Todo: It would be helpful if the function could highlight the offending square
     for (BoardSquare square in boardList) {
-      if (set.contains(square.value) == true && square.value != 0) {
-        isUnique = false;
-        break;
-      } else {
-        set.add(square.value);
+      for (BoardSquare square1 in newSet) {
+        if (square.value == square1.value && square.value != 0) {
+          isUnique[0] = false;
+          isUnique[1] = [square.position, square1.position];
+          break;
+        }
       }
+      // if (set.contains(square.value) == true && square.value != 0) {
+      //   isUnique[0] = false;
+      //   isUnique[1] = [square.position];
+      //   break;
+      // } else {
+      //   set.add(square.value);
+      // }
+      newSet.add(square);
     }
   }
   return isUnique;

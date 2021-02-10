@@ -6,6 +6,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'check_legal_fn.dart' as legal;
 import 'solve_fn.dart' as solve;
+import 'old_solve_fn.dart' as oldSolve;
 
 class SudokuGrid extends ChangeNotifier {
   List<List<BoardSquare>> userBoard;
@@ -47,6 +48,8 @@ class SudokuGrid extends ChangeNotifier {
     userBoard.forEach((row) {
       row.forEach((boardSquare) {
         boardSquare.value = 0;
+        boardSquare.hasError = false;
+        boardSquare.userInputted = false;
       });
     });
     this.selectedNumber = 0;
@@ -73,7 +76,10 @@ class SudokuGrid extends ChangeNotifier {
 
     // If on first pass the board is illegal we should show which numbers
     // are the offending ones
-    if (legal.checkLegal(intBoard) == false) {
+    if (oldSolve.checkLegal(board)[0] == false) {
+      // If there are errors we want to update them
+      // Todo: Store result from `checklegal` call so it doesn't need to be called twice
+      _updateBoardWithErrors(oldSolve.checkLegal(board)[1], board);
       solveScreenStates = SolveScreenStates.Error;
       boardErrors = BoardErrors.Duplicate;
       notifyListeners();
@@ -127,6 +133,21 @@ class SudokuGrid extends ChangeNotifier {
       ),
     );
     return newBoard;
+  }
+
+  // Helper function to update board if any positions match that of error position
+  void _updateBoardWithErrors(
+      List<Position> positions, List<List<BoardSquare>> board) {
+    // Iterate through each board square
+    for (List<BoardSquare> row in board) {
+      for (BoardSquare square in row) {
+        // Update user inputted to true if the square's position object
+        // matches a position object in the list (thanks Equatable)
+        if (positions.contains(square.position)) {
+          square.hasError = true;
+        }
+      }
+    }
   }
 
   List<Position> _userInputtedNumbers(List<List<BoardSquare>> board) {

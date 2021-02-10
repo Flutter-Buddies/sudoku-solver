@@ -17,6 +17,7 @@ class BoardSquare extends ChangeNotifier {
   void updateValue(int i) {
     value = i;
     userInputted = true;
+    hasError = false;
     notifyListeners();
   }
 

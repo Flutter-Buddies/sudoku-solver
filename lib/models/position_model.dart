@@ -10,6 +10,5 @@ class Position extends Equatable {
   String toString() => 'Position(x: $x, y: $y)';
 
   @override
-  // TODO: implement props
   List<Object> get props => [x, y];
 }
