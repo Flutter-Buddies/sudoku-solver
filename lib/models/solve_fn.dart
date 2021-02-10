@@ -4,7 +4,6 @@ import 'check_legal_fn.dart' as legal;
 
 // Assume `solveBoard` is passed a legal board with an empty space
 List<List<int>> solveBoard(List<List<int>> board) {
-  print('Iterated');
   // 1. First we need to find the Position in the board where there is an empty square
   var position = _nextEmptySquare(board);
 
@@ -17,12 +16,12 @@ List<List<int>> solveBoard(List<List<int>> board) {
     if (legal.checkLegal(board)) {
       // 5. See if the board has any blank spaces
       if (_hasBlanks(board) == false) {
-        // If there are no blanks, the puzzle is solved and board can be returned
-        print('Solved!');
+        // 6a. If there are no blanks, the puzzle is solved and board can be returned
         return board;
       } else {
-        // If there are blanks, then it needs to be passed to the next recursion
-        // Board could be null because null could be returned from some if statements
+        // 6b. If there are blanks, then it needs to be passed to the next recursion
+        // Board could be null because null could be returned from some branches or recursion
+        // and need to be dropped (not returned)
         List<List<int>> unsolvedBoard = solveBoard(board);
         if (unsolvedBoard != null) {
           return unsolvedBoard;
@@ -32,6 +31,7 @@ List<List<int>> solveBoard(List<List<int>> board) {
       // Drop the board because it is not legal
     }
   }
+  return null;
 }
 
 // Helper function to `solveBoard` that finds the [Position] of the next empty (0) square
@@ -42,7 +42,6 @@ Position _nextEmptySquare(List<List<int>> board) {
     for (int j = 0; j < 9; j++) {
       if (board[i][j] == 0) {
         position = Position(x: i, y: j);
-        print(position);
         // Break the inner for loop
         break;
       }
