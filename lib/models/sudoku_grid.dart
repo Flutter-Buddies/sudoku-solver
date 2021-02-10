@@ -139,7 +139,6 @@ class SudokuGrid extends ChangeNotifier {
         }
       }
     }
-    print('All user inputted positions: $userInputtedPositions');
     return userInputtedPositions;
   }
 

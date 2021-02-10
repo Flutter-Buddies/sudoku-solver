@@ -10,8 +10,8 @@ bool checkLegal(List<List<int>> board) {
     // Compare a single value in a list against the other values
     List<int> set = [];
     for (int square in list) {
-      // If square value is in _set then it means there is a duplicate
-      // If it is not, add the square to _set
+      // If square value is in set then it means there is a duplicate
+      // If it is not, add the square to set
       // Wanted to do list.contains(square) but it obviously will
       if (set.contains(square) && square != 0) {
         isUnique = false;
