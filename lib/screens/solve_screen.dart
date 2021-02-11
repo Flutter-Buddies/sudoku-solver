@@ -50,8 +50,11 @@ class SolveScreen extends StatelessWidget {
                   flex: 2,
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 32.0, vertical: 16.0),
+                  padding: EdgeInsets.symmetric(
+                      horizontal: 32.0,
+                      vertical: MediaQuery.of(context).size.height < 620
+                          ? 8.0
+                          : 16.0),
                   child: AnimatedSolveButton(),
                 ),
                 Spacer(),
