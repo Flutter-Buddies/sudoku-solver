@@ -18,12 +18,13 @@ class HorizontalLayout extends StatelessWidget {
         ),
         Row(
           mainAxisSize: MainAxisSize.max,
+          // crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Container(
-              height: 384,
-              width: 380,
-              child: Padding(
-                padding: const EdgeInsets.all(12.0),
+            AspectRatio(
+              aspectRatio: 1.05,
+              child: FractionallySizedBox(
+                widthFactor: 0.92,
+                heightFactor: 0.92,
                 child: SudokuTable(),
               ),
             ),
@@ -34,18 +35,20 @@ class HorizontalLayout extends StatelessWidget {
                   children: [
                     Container(
                       child: Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.only(top: 8.0),
                         child: OptionsRow(),
                       ),
                     ),
-                    Spacer(),
-                    Padding(
-                      padding: const EdgeInsets.all(32.0),
+                    Spacer(
+                      flex: 2,
+                    ),
+                    FractionallySizedBox(
+                      widthFactor: 0.85,
                       child: KeyPad(),
                     ),
                     Spacer(),
-                    Padding(
-                      padding: const EdgeInsets.all(16.0),
+                    FractionallySizedBox(
+                      widthFactor: 0.85,
                       child: AnimatedSolveButton(),
                     ),
                     Spacer(),

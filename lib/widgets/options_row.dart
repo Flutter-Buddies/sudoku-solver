@@ -9,28 +9,25 @@ class OptionsRow extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: SecondaryButton(
-              onTap: () => context.read<SudokuGrid>().resetBoard(),
-              label: 'Reset',
-              icon: Icons.refresh_outlined,
-            ),
+          child: SecondaryButton(
+            onTap: () => context.read<SudokuGrid>().resetBoard(),
+            label: 'Reset',
+            icon: Icons.refresh_outlined,
           ),
         ),
+        SizedBox(
+          width: 8.0,
+        ),
         Expanded(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: SecondaryButton(
-              onTap: () {
-                // ignore: deprecated_member_use
-                Scaffold.of(context).showSnackBar(
-                    SnackBar(content: Text('Feature coming soon!')));
-                // Todo: Implement image recognition functionality
-              },
-              label: 'Take picture',
-              icon: Icons.camera,
-            ),
+          child: SecondaryButton(
+            onTap: () {
+              // ignore: deprecated_member_use
+              Scaffold.of(context).showSnackBar(
+                  SnackBar(content: Text('Feature coming soon!')));
+              // Todo: Implement image recognition functionality
+            },
+            label: 'Take picture',
+            icon: Icons.camera,
           ),
         ),
       ],

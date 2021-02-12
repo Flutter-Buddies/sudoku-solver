@@ -26,8 +26,6 @@ class _AnimatedSolveButtonState extends State<AnimatedSolveButton>
   AnimationController _sliderThumbController;
   Animation<double> _loadingAnimation;
   AnimationController _loadingController;
-  Animation<double> _backgroundSliderAnimation;
-  AnimationController _backgroundSliderController;
 
   @override
   void initState() {
@@ -67,7 +65,6 @@ class _AnimatedSolveButtonState extends State<AnimatedSolveButton>
     });
 
     // Initialise background slider animation
-    _backgroundSliderController = AnimationController(vsync: this);
   }
 
   @override

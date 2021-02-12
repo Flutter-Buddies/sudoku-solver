@@ -19,36 +19,34 @@ class VerticalLayout extends StatelessWidget {
             color: Colors.blueAccent,
           ),
         ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Spacer(flex: 3),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: OptionsRow(),
-            ),
-            Spacer(),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: SudokuTable(),
-            ),
-            Spacer(flex: 2),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 48,
+        Center(
+          child: Column(
+            // crossAxisAlignment: CrossAxisAlignment.center,
+            // crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Spacer(flex: 3),
+              FractionallySizedBox(
+                widthFactor: 0.92,
+                child: OptionsRow(),
               ),
-              child: KeyPad(),
-            ),
-            Spacer(flex: 2),
-            Padding(
-              padding: EdgeInsets.symmetric(
-                  horizontal: 32.0,
-                  vertical:
-                      MediaQuery.of(context).size.height < 620 ? 8.0 : 16.0),
-              child: AnimatedSolveButton(),
-            ),
-            // Spacer(),
-          ],
+              Spacer(),
+              FractionallySizedBox(
+                widthFactor: 0.92,
+                child: SudokuTable(),
+              ),
+              Spacer(flex: 2),
+              FractionallySizedBox(
+                widthFactor: 0.75,
+                child: KeyPad(),
+              ),
+              Spacer(flex: 2),
+              FractionallySizedBox(
+                widthFactor: 0.75,
+                child: AnimatedSolveButton(),
+              ),
+              Spacer(),
+            ],
+          ),
         ),
       ],
     );
