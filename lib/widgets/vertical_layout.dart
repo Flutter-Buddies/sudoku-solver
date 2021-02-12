@@ -22,9 +22,7 @@ class VerticalLayout extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Spacer(
-              flex: 3,
-            ),
+            Spacer(flex: 3),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: OptionsRow(),
@@ -34,18 +32,14 @@ class VerticalLayout extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: SudokuTable(),
             ),
-            Spacer(
-              flex: 2,
-            ),
+            Spacer(flex: 2),
             Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: 48,
               ),
               child: KeyPad(),
             ),
-            Spacer(
-              flex: 2,
-            ),
+            Spacer(flex: 2),
             Padding(
               padding: EdgeInsets.symmetric(
                   horizontal: 32.0,
@@ -53,7 +47,7 @@ class VerticalLayout extends StatelessWidget {
                       MediaQuery.of(context).size.height < 620 ? 8.0 : 16.0),
               child: AnimatedSolveButton(),
             ),
-            Spacer(),
+            // Spacer(),
           ],
         ),
       ],

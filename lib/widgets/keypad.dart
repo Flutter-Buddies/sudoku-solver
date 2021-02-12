@@ -6,7 +6,6 @@ class KeyPad extends StatelessWidget {
   static const int columns = 5;
   @override
   Widget build(BuildContext context) {
-    print('${MediaQuery.of(context).size.height}');
     return Wrap(
       alignment: WrapAlignment.center,
       spacing: 16.0,

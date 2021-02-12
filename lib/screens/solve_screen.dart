@@ -6,9 +6,10 @@ import 'package:sudoku_solver/widgets/vertical_layout.dart';
 class SolveScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // If the width is greater than 400px the phone can rotate
     var _shortestSide = MediaQuery.of(context).size.shortestSide;
     print(_shortestSide);
-    var _canRotate = _shortestSide < 900;
+    var _canRotate = _shortestSide > 400;
     if (_canRotate == false) {
       SystemChrome.setPreferredOrientations([
         DeviceOrientation.portraitUp,

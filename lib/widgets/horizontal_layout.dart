@@ -24,7 +24,7 @@ class HorizontalLayout extends StatelessWidget {
               width: 380,
               child: Padding(
                 padding: const EdgeInsets.all(12.0),
-                child: AspectRatio(aspectRatio: 0.80, child: SudokuTable()),
+                child: SudokuTable(),
               ),
             ),
             Expanded(
