@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:sudoku_solver/widgets/horizontal_layout.dart';
-import 'package:sudoku_solver/widgets/vertical_layout.dart';
+import '../widgets/horizontal_layout.dart';
+import '../widgets/vertical_layout.dart';
 
 class SolveScreen extends StatelessWidget {
   @override

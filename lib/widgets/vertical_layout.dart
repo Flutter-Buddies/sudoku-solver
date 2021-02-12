@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sudoku_solver/widgets/sudoku_table.dart';
+import 'sudoku_table.dart';
 
 import 'animated_solve_button.dart';
 import 'keypad.dart';

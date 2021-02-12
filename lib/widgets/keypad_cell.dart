@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:provider/provider.dart';
-import 'package:sudoku_solver/models/sudoku_grid.dart';
+import '../models/sudoku_grid.dart';
 
 class KeyPadCell extends StatelessWidget {
   KeyPadCell({@required this.numberValue}) : assert(numberValue >= 0);

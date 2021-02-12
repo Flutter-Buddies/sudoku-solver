@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:sudoku_solver/constants/enums.dart';
-import 'package:sudoku_solver/models/sudoku_grid.dart';
+import '../constants/enums.dart';
+import '../models/sudoku_grid.dart';
 import 'package:provider/provider.dart';
-import 'package:sudoku_solver/widgets/custom_slider_thumb_rect.dart';
+import 'custom_slider_thumb_rect.dart';
 
 class AnimatedSolveButton extends StatefulWidget {
   @override

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sudoku_solver/screens/solve_screen.dart';
-import 'package:sudoku_solver/screens/history_screen.dart';
-import 'package:sudoku_solver/models/sudoku_grid.dart';
-import 'package:sudoku_solver/constants/example_boards.dart';
+import 'screens/solve_screen.dart';
+import 'screens/history_screen.dart';
+import 'models/sudoku_grid.dart';
+import 'constants/example_boards.dart';
 import 'package:flutter/services.dart';
 
 void main() {
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<SudokuGrid>(
-      create: (context) => SudokuGrid.fromTemplate(mediumBoard),
+      create: (context) => SudokuGrid.blank(9, 9),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Sudoku Solver',

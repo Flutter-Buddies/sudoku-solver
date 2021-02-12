@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:sudoku_solver/widgets/animated_solve_button.dart';
-import 'package:sudoku_solver/widgets/keypad.dart';
-import 'package:sudoku_solver/widgets/options_row.dart';
-import 'package:sudoku_solver/widgets/sudoku_table.dart';
+import 'animated_solve_button.dart';
+import 'keypad.dart';
+import 'options_row.dart';
+import 'sudoku_table.dart';
 
 class HorizontalLayout extends StatelessWidget {
   @override

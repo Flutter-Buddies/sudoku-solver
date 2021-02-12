@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sudoku_solver/constants/enums.dart';
-import 'package:sudoku_solver/models/board_square.dart';
-import 'package:sudoku_solver/models/position_model.dart';
+import '../constants/enums.dart';
+import 'board_square.dart';
+import 'position_model.dart';
 import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'check_legal_fn.dart' as legal;

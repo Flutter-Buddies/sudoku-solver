@@ -1,5 +1,5 @@
-import 'package:sudoku_solver/models/board_square.dart';
-import 'package:sudoku_solver/models/position_model.dart';
+import '../models/board_square.dart';
+import '../models/position_model.dart';
 
 List<List<BoardSquare>> easyBoard = [
   [

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:sudoku_solver/models/board_square.dart';
-import 'package:sudoku_solver/widgets/sudoku_cell.dart';
+import '../models/board_square.dart';
+import 'sudoku_cell.dart';
 import 'package:provider/provider.dart';
-import 'package:sudoku_solver/models/sudoku_grid.dart';
+import '../models/sudoku_grid.dart';
 
 class SudokuTable extends StatelessWidget {
   static const _borderRadius = 15.0;

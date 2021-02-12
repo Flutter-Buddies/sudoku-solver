@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sudoku_solver/models/position_model.dart';
+import 'position_model.dart';
 
 class BoardSquare extends ChangeNotifier {
   Position position;

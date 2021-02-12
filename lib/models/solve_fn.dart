@@ -1,4 +1,4 @@
-import 'package:sudoku_solver/models/position_model.dart';
+import 'position_model.dart';
 
 import 'check_legal_fn.dart' as legal;
 

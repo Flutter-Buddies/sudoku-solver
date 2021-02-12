@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sudoku_solver/constants/enums.dart';
-import 'package:sudoku_solver/models/board_square.dart';
-import 'package:sudoku_solver/models/sudoku_grid.dart';
+import '../constants/enums.dart';
+import '../models/board_square.dart';
+import '../models/sudoku_grid.dart';
 
 class SudokuCell extends StatelessWidget {
   // We are using the value of 0 to mean blank, therefore if the value of the board square is 0 we need to show nothing
