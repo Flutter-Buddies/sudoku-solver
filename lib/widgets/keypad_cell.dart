@@ -9,20 +9,17 @@ class KeyPadCell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool isSelected =
+        context.watch<SudokuGrid>().selectedNumber == numberValue;
     return GestureDetector(
       onTap: () {
-        //print(numberValue);
-        Provider.of<SudokuGrid>(context, listen: false)
-            .updateSelectedNumber(numberValue);
+        context.read<SudokuGrid>().updateSelectedNumber(numberValue);
       },
       child: Container(
         height: MediaQuery.of(context).size.width >= 800 ? 60 : 35,
         width: MediaQuery.of(context).size.width >= 800 ? 60 : 35,
         decoration: BoxDecoration(
-            color:
-                numberValue == Provider.of<SudokuGrid>(context).selectedNumber
-                    ? Colors.blueAccent
-                    : Colors.transparent,
+            color: isSelected ? Colors.blueAccent : Colors.transparent,
             border: Border.all(
                 color: Colors.blueAccent,
                 width: MediaQuery.of(context).size.width >= 800 ? 2 : 1),
@@ -35,19 +32,13 @@ class KeyPadCell extends StatelessWidget {
             child: numberValue == 0
                 ? Icon(
                     Entypo.eraser,
-                    color: numberValue ==
-                            Provider.of<SudokuGrid>(context).selectedNumber
-                        ? Colors.white
-                        : Colors.blue[900],
+                    color: isSelected ? Colors.white : Colors.blue[900],
                   )
                 : Text(
                     // Instead of showing the number 0, we want the user to be able to a blank space
                     numberValue.toString(),
                     style: TextStyle(
-                      color: numberValue ==
-                              Provider.of<SudokuGrid>(context).selectedNumber
-                          ? Colors.white
-                          : Colors.blue[900],
+                      color: isSelected ? Colors.white : Colors.blue[900],
                       // fontSize: 18,
                     ),
                   ),

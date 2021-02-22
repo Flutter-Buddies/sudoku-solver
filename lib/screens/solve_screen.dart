@@ -8,7 +8,6 @@ class SolveScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     // If the width is greater than 400px the phone can rotate
     var _shortestSide = MediaQuery.of(context).size.width;
-    print(_shortestSide);
     var _canRotate = _shortestSide > 400;
     if (_canRotate == false) {
       SystemChrome.setPreferredOrientations([

@@ -32,12 +32,12 @@ class SudokuTable extends StatelessWidget {
         child: Table(
           defaultVerticalAlignment: TableCellVerticalAlignment.middle,
           children: List.generate(
-            Provider.of<SudokuGrid>(context, listen: false).height,
+            9,
             (int rowNumber) => TableRow(
               children: List.generate(
-                Provider.of<SudokuGrid>(context, listen: false).width,
+                9,
                 (int columnNumber) => ChangeNotifierProvider<BoardSquare>.value(
-                  value: Provider.of<SudokuGrid>(context).userBoard[rowNumber]
+                  value: context.watch<SudokuGrid>().userBoard[rowNumber]
                       [columnNumber],
                   child: SudokuCell(),
                 ),

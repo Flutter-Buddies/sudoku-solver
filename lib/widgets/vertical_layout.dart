@@ -21,8 +21,6 @@ class VerticalLayout extends StatelessWidget {
         ),
         Center(
           child: Column(
-            // crossAxisAlignment: CrossAxisAlignment.center,
-            // crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Spacer(flex: 3),
               FractionallySizedBox(

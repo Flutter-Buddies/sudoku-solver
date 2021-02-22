@@ -19,12 +19,11 @@ class SudokuCell extends StatelessWidget {
     return InkWell(
       onTap: () {
         // Update the value of the board square based on the current selected number from the keypad
-        Provider.of<BoardSquare>(context, listen: false).updateValue(
-            Provider.of<SudokuGrid>(context, listen: false).selectedNumber);
-        Provider.of<SudokuGrid>(context, listen: false).boardErrors =
-            BoardErrors.None;
-        Provider.of<SudokuGrid>(context, listen: false).solveScreenStates =
-            SolveScreenStates.Idle;
+        context
+            .read<BoardSquare>()
+            .updateValue(context.read<SudokuGrid>().selectedNumber);
+        context.read<SudokuGrid>().boardErrors = BoardErrors.None;
+        context.read<SudokuGrid>().solveScreenStates = SolveScreenStates.Idle;
       },
       child: AspectRatio(
         // Find this aspect ratio looks a little better than 1.00
@@ -38,27 +37,15 @@ class SudokuCell extends StatelessWidget {
               // Along with the table outer border this creates the inner and outer grids
               // Todo: Figure out a way to not have a border on bottom and right side of table
               right: BorderSide(
-                width: (Provider.of<BoardSquare>(context, listen: false)
-                                .position
-                                .y ==
-                            2 ||
-                        Provider.of<BoardSquare>(context, listen: false)
-                                .position
-                                .y ==
-                            5)
+                width: (context.watch<BoardSquare>().position.y == 2 ||
+                        context.watch<BoardSquare>().position.y == 5)
                     ? 1.5
                     : 0.5,
                 color: Colors.blueAccent,
               ),
               bottom: BorderSide(
-                width: (Provider.of<BoardSquare>(context, listen: false)
-                                .position
-                                .x ==
-                            2 ||
-                        Provider.of<BoardSquare>(context, listen: false)
-                                .position
-                                .x ==
-                            5)
+                width: (context.watch<BoardSquare>().position.x == 2 ||
+                        context.watch<BoardSquare>().position.x == 5)
                     ? 1.5
                     : 0.5,
                 color: Colors.blueAccent,
@@ -69,7 +56,7 @@ class SudokuCell extends StatelessWidget {
             fit: BoxFit.fitHeight,
             child: Center(
               child: Text(
-                getCellValue(Provider.of<BoardSquare>(context).value),
+                getCellValue(context.watch<BoardSquare>().value),
                 style: TextStyle(
                     // fontSize: 18,
                     color: context.watch<BoardSquare>().hasError

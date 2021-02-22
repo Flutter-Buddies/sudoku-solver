@@ -4,42 +4,37 @@ import 'board_square.dart';
 import 'position_model.dart';
 import 'dart:async';
 import 'package:flutter/foundation.dart';
-import 'check_legal_fn.dart' as legal;
 import 'solve_fn.dart' as solve;
 import 'old_solve_fn.dart' as oldSolve;
 
 class SudokuGrid extends ChangeNotifier {
   List<List<BoardSquare>> userBoard;
-  int width;
-  int height;
+  final int width = 9;
+  final int height = 9;
   int selectedNumber = 0;
   SolveScreenStates solveScreenStates = SolveScreenStates.Idle;
   BoardErrors boardErrors = BoardErrors.None;
 
   // Generic constructor
-  SudokuGrid({this.userBoard, this.width, this.height});
+  SudokuGrid({this.userBoard});
 
   // Named constructor to build a blank board
-  SudokuGrid.blank(int rowCount, int columnCount) {
+  SudokuGrid.blank() {
     this.userBoard = List.generate(
-      rowCount,
+      width,
       (int row) => List.generate(
-        columnCount,
+        height,
         (int column) =>
             BoardSquare(position: Position(x: row, y: column), value: 0),
         growable: false,
       ),
       growable: false,
     );
-    this.width = rowCount;
-    this.height = columnCount;
   }
 
   // Named constructor to build a board from a template (see lib/constants/example_bards.dart)
   SudokuGrid.fromTemplate(List<List<BoardSquare>> templateBoard) {
     userBoard = templateBoard;
-    this.width = 9;
-    this.height = 9;
   }
 
   // Cycle through each board square and set it's value to 0
