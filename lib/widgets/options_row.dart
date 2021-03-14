@@ -1,7 +1,11 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'package:sudoku_solver/translations/locale_keys.g.dart';
+
 import '../models/sudoku_grid.dart';
 import 'secondary_button.dart';
-import 'package:provider/provider.dart';
 
 class OptionsRow extends StatelessWidget {
   @override
@@ -11,7 +15,7 @@ class OptionsRow extends StatelessWidget {
         Expanded(
           child: SecondaryButton(
             onTap: () => context.read<SudokuGrid>().resetBoard(),
-            label: 'Reset',
+            label: LocaleKeys.reset.tr(),
             icon: Icons.refresh_outlined,
           ),
         ),
@@ -23,10 +27,10 @@ class OptionsRow extends StatelessWidget {
             onTap: () {
               // ignore: deprecated_member_use
               Scaffold.of(context).showSnackBar(
-                  SnackBar(content: Text('Feature coming soon!')));
+                  SnackBar(content: Text(LocaleKeys.feature_coming_soon.tr())));
               // Todo: Implement image recognition functionality
             },
-            label: 'Take picture',
+            label: LocaleKeys.take_picture.tr(),
             icon: Icons.camera,
           ),
         ),

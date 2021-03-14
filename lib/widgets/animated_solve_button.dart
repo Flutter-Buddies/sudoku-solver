@@ -1,7 +1,11 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'package:sudoku_solver/translations/locale_keys.g.dart';
+
 import '../constants/enums.dart';
 import '../models/sudoku_grid.dart';
-import 'package:provider/provider.dart';
 import 'custom_slider_thumb_rect.dart';
 
 class AnimatedSolveButton extends StatefulWidget {
@@ -32,7 +36,7 @@ class _AnimatedSolveButtonState extends State<AnimatedSolveButton>
     super.initState();
     // Initialise slider variables
     _currentSliderValue = 0;
-    _sliderText = '    Slide to solve >>>';
+    _sliderText = '    ${LocaleKeys.slide_to_solve.tr()} >>>';
     _borderColor = Colors.blueAccent;
 
     // Initialise slider thumb animation
@@ -86,7 +90,7 @@ class _AnimatedSolveButtonState extends State<AnimatedSolveButton>
         _loadingController.reset();
       }
       setState(() {
-        _sliderText = '    Slide to solve >>>';
+        _sliderText = '    ${LocaleKeys.slide_to_solve.tr()} >>>';
         _borderColor = Colors.blueAccent;
       });
     }
@@ -95,7 +99,7 @@ class _AnimatedSolveButtonState extends State<AnimatedSolveButton>
         SolveScreenStates.Solved) {
       setState(() {
         _borderColor = Colors.green;
-        _sliderText = 'SOLVED!';
+        _sliderText = LocaleKeys.solved.tr();
       });
       _loadingController.reset();
     }
@@ -103,7 +107,7 @@ class _AnimatedSolveButtonState extends State<AnimatedSolveButton>
     if (context.watch<SudokuGrid>().solveScreenStates ==
         SolveScreenStates.Loading) {
       setState(() {
-        _sliderText = 'Solving...';
+        _sliderText = LocaleKeys.solving.tr();
       });
       _loadingController.forward();
     }
@@ -111,7 +115,7 @@ class _AnimatedSolveButtonState extends State<AnimatedSolveButton>
     if (context.watch<SudokuGrid>().boardErrors == BoardErrors.Duplicate) {
       setState(() {
         _borderColor = Colors.red;
-        _sliderText = 'Invalid Board - Duplicate Number';
+        _sliderText = LocaleKeys.invalid_board_duplicate_number.tr();
       });
       _loadingController.reset();
     }
@@ -119,7 +123,7 @@ class _AnimatedSolveButtonState extends State<AnimatedSolveButton>
     if (context.watch<SudokuGrid>().boardErrors == BoardErrors.UnSolvable) {
       setState(() {
         _borderColor = Colors.red;
-        _sliderText = 'Unsolvable';
+        _sliderText = LocaleKeys.unsolvable.tr();
       });
       _loadingController.reset();
     }

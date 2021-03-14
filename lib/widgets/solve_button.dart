@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sudoku_solver/translations/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import '../constants/enums.dart';
 import '../models/sudoku_grid.dart';
 
@@ -17,9 +19,12 @@ class _SolveButtonState extends State<SolveButton> {
     if (context.watch<SudokuGrid>().boardErrors == BoardErrors.UnSolvable) {
       setState(() {
         _buttonWidget = Text(
-          'Invalid Puzzle - Unsolvable',
+          LocaleKeys.invalid_puzzle_unsolvable.tr(),
           style: TextStyle(
-              color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+            color: Colors.white,
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
         );
         _buttonColor = Colors.red;
       });
@@ -27,9 +32,12 @@ class _SolveButtonState extends State<SolveButton> {
         BoardErrors.Duplicate) {
       setState(() {
         _buttonWidget = Text(
-          'Invalid Puzzle - Duplicate Number',
+          LocaleKeys.invalid_puzzle_duplicate_number.tr(),
           style: TextStyle(
-              color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+            color: Colors.white,
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
         );
         _buttonColor = Colors.red;
       });
@@ -49,18 +57,24 @@ class _SolveButtonState extends State<SolveButton> {
         SolveScreenStates.Solved) {
       setState(() {
         _buttonWidget = Text(
-          'Solved',
+          LocaleKeys.solved.tr(),
           style: TextStyle(
-              color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+            color: Colors.white,
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
         );
         _buttonColor = Colors.green;
       });
     } else {
       setState(() {
         _buttonWidget = Text(
-          'Solve',
+          LocaleKeys.solve.tr(),
           style: TextStyle(
-              color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+            color: Colors.white,
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
         );
         _buttonColor = Colors.blueAccent;
       });
@@ -95,25 +109,25 @@ class BottomButton extends StatelessWidget {
               SolveScreenStates.Idle &&
           Provider.of<SudokuGrid>(context).boardErrors == BoardErrors.None) {
         return Text(
-          'Solve!',
+          '${LocaleKeys.solve.tr()}!',
           style: TextStyle(color: Colors.white, fontSize: 20),
         );
       } else if (Provider.of<SudokuGrid>(context).boardErrors ==
           BoardErrors.Duplicate) {
         return Text(
-          'Invalid Board',
+          LocaleKeys.invalid_board.tr(),
           style: TextStyle(color: Colors.red, fontSize: 20),
         );
       } else if (Provider.of<SudokuGrid>(context).boardErrors ==
           BoardErrors.UnSolvable) {
         return Text(
-          'This board cannot be solved',
+          LocaleKeys.this_board_connot_be_solved.tr(),
           style: TextStyle(color: Colors.red, fontSize: 20),
         );
       } else if (Provider.of<SudokuGrid>(context).solveScreenStates ==
           SolveScreenStates.Solved) {
         return Text(
-          'SOLVED!',
+          LocaleKeys.solved.tr(),
           style: TextStyle(color: Colors.green, fontSize: 20),
         );
       } else {
@@ -127,8 +141,11 @@ class BottomButton extends StatelessWidget {
       color: Colors.blueAccent,
       onPressed: () {
         final snackBar = SnackBar(
-            duration: Duration(seconds: 2),
-            content: Text('There is an error on the board!'));
+          duration: Duration(seconds: 2),
+          content: Text(
+            LocaleKeys.there_is_an_error_on_the_board.tr(),
+          ),
+        );
 
         Provider.of<SudokuGrid>(context, listen: false).solveButtonPress(
             Provider.of<SudokuGrid>(context, listen: false).userBoard);
