@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:sudoku_solver/translations/locale_keys.g.dart';
+import 'package:sudoku_solver/widgets/language_bottom_sheet.dart';
 
 import '../models/sudoku_grid.dart';
 import 'secondary_button.dart';
@@ -18,6 +19,21 @@ class OptionsRow extends StatelessWidget {
             label: LocaleKeys.reset.tr(),
             icon: Icons.refresh_outlined,
           ),
+        ),
+        SizedBox(
+          width: 8.0,
+        ),
+        SecondaryButton(
+          onTap: () {
+            showModalBottomSheet(
+              backgroundColor: Colors.transparent,
+              context: context,
+              builder: (BuildContext context) {
+                return LanguageBottomSheet();
+              },
+            );
+          },
+          icon: Icons.language,
         ),
         SizedBox(
           width: 8.0,

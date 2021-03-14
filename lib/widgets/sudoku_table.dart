@@ -29,17 +29,21 @@ class SudokuTable extends StatelessWidget {
         borderRadius: BorderRadius.all(
           Radius.circular(_borderRadius),
         ),
-        child: Table(
-          defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-          children: List.generate(
-            9,
-            (int rowNumber) => TableRow(
-              children: List.generate(
-                9,
-                (int columnNumber) => ChangeNotifierProvider<BoardSquare>.value(
-                  value: context.watch<SudokuGrid>().userBoard[rowNumber]
-                      [columnNumber],
-                  child: SudokuCell(),
+        child: Directionality(
+          textDirection: TextDirection.ltr,
+          child: Table(
+            defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+            children: List.generate(
+              9,
+              (int rowNumber) => TableRow(
+                children: List.generate(
+                  9,
+                  (int columnNumber) =>
+                      ChangeNotifierProvider<BoardSquare>.value(
+                    value: context.watch<SudokuGrid>().userBoard[rowNumber]
+                        [columnNumber],
+                    child: SudokuCell(),
+                  ),
                 ),
               ),
             ),

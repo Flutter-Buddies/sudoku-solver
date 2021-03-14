@@ -16,5 +16,6 @@ abstract class  LocaleKeys {
   static const there_is_an_error_on_the_board = 'there_is_an_error_on_the_board';
   static const invalid_board_duplicate_number = 'invalid_board_duplicate_number';
   static const sudoku_solver = 'sudoku_solver';
+  static const change_language = 'change_language';
 
 }

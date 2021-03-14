@@ -13,5 +13,6 @@
   "this_board_connot_be_solved": "لا يمكن حل هذه اللوحة",
   "there_is_an_error_on_the_board": "هناك خطأ في لوحة السودوكو!",
   "invalid_board_duplicate_number": "لوحة غير صالحة - رقم مكرر",
-  "sudoku_solver": "Sudoku Solver"
+  "sudoku_solver": "Sudoku Solver",
+  "change_language": "تغيير اللغة"
 }

@@ -29,7 +29,8 @@ class CodegenLoader extends AssetLoader{
   "this_board_connot_be_solved": "لا يمكن حل هذه اللوحة",
   "there_is_an_error_on_the_board": "هناك خطأ في لوحة السودوكو!",
   "invalid_board_duplicate_number": "لوحة غير صالحة - رقم مكرر",
-  "sudoku_solver": "Sudoku Solver"
+  "sudoku_solver": "Sudoku Solver",
+  "change_language": "تغيير اللغة"
 };
 static const Map<String,dynamic> en = {
   "slide_to_solve": "Slide to solve",
@@ -46,7 +47,8 @@ static const Map<String,dynamic> en = {
   "this_board_connot_be_solved": "This board cannot be solved",
   "there_is_an_error_on_the_board": "There is an error on the board!",
   "invalid_board_duplicate_number": "Invalid Board - Duplicate Number",
-  "sudoku_solver": "Sudoku Solver"
+  "sudoku_solver": "Sudoku Solver",
+  "change_language": "Change Language"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }
