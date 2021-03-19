@@ -6,8 +6,11 @@ class SecondaryButton extends StatelessWidget {
   final Function onTap;
   final String label;
   final IconData icon;
-  SecondaryButton(
-      {@required this.onTap, @required this.label, @required this.icon});
+  SecondaryButton({
+    @required this.onTap,
+    this.label,
+    @required this.icon,
+  });
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -28,13 +31,15 @@ class SecondaryButton extends StatelessWidget {
                 size: 20,
                 color: Colors.white.withOpacity(0.7),
               ),
-              SizedBox(
-                width: 4,
-              ),
-              Text(
-                label,
-                style: TextStyle(color: Colors.white.withOpacity(0.7)),
-              ),
+              if (label != null)
+                SizedBox(
+                  width: 4,
+                ),
+              if (label != null)
+                Text(
+                  label,
+                  style: TextStyle(color: Colors.white.withOpacity(0.7)),
+                ),
             ],
           ),
         ),

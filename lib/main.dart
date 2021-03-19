@@ -1,13 +1,31 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'screens/solve_screen.dart';
-import 'models/sudoku_grid.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+import 'package:sudoku_solver/translations/codegen_loader.g.dart';
 
-void main() {
+import 'models/sudoku_grid.dart';
+import 'screens/solve_screen.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await EasyLocalization.ensureInitialized();
+
   SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(statusBarColor: Colors.blueAccent));
-  runApp(MyApp());
+  runApp(
+    EasyLocalization(
+      supportedLocales: [
+        Locale('en'),
+        Locale('ar'),
+      ],
+      fallbackLocale: Locale('en'),
+      path: 'assets/translations',
+      assetLoader: CodegenLoader(),
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -23,6 +41,9 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
+        locale: context.locale,
+        supportedLocales: context.supportedLocales,
+        localizationsDelegates: context.localizationDelegates,
         initialRoute: 'solve',
         routes: {
           'solve': (context) => SolveScreen(),
